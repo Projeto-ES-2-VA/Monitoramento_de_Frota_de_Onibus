@@ -1,7 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/44dba92b612d4d0b88a198132b9a9bbb)](https://app.codacy.com/gh/Dev-Henrique-Almeida/Monitoramento_de_Frota_de_Onibus/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 <div align="center"> 
 <h1>Sistema de Monitoramento de Frota de ônibus</h1>
-<img src="https://github.com/Projeto-ES-2-VA/Monitoramento_de_Frota_de_Onibus/tree/main/documentos/logo.png"/>
+<img src="https://raw.githubusercontent.com/Projeto-ES-2-VA/Monitoramento_de_Frota_de_Onibus/main/documentos/logo.png"/>
 
 
 </div>
