@@ -1,19 +1,49 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+on: [push, pull_request]
 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5s
+        env:
+          POSTGRES_PASSWORD: password
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.1
+
+      - name: Install PostgreSQL client
+        run:
+          sudo apt-get -yqq install libpq-dev
+
+      - name: Cache Ruby Gems
+        uses: actions/cache@v2
+
+      - name: Bundle Install
+        run:
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Tests
+         env:
+           PG_DATABASE: postgres
+           PG_HOST: localhost
+           PG_USER: postgres
+           PG_PASSWORD: password
+           RAILS_ENV: actions
+           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+           WITH_COVERAGE: true
+           DISABLE_SPRING: 1
+         run: |
+           bundle exec rails db:prepare
