@@ -1,0 +1,52 @@
+<%= form_with(model: rotum) do |form| %>
+  <% if rotum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(rotum.errors.count, "error") %> prohibited this rotum from being saved:</h2>
+
+      <ul>
+        <% rotum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :valor, style: "display: block" %>
+    <%= form.text_field :valor %>
+  </div>
+
+  <div>
+    <%= form.label :distancia, style: "display: block" %>
+    <%= form.text_field :distancia %>
+  </div>
+
+  <div>
+    <%= form.label :duracao, style: "display: block" %>
+    <%= form.text_field :duracao %>
+  </div>
+
+  <div>
+    <%= form.label :inicio, style: "display: block" %>
+    <%= form.text_field :inicio %>
+  </div>
+
+  <div>
+    <%= form.label :fim, style: "display: block" %>
+    <%= form.text_field :fim %>
+  </div>
+
+  <div>
+    <%= form.label :horario, style: "display: block" %>
+    <%= form.time_field :horario %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
