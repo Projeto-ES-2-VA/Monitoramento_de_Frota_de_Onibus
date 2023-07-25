@@ -1,0 +1,2 @@
+class Rotum < ApplicationRecord
+end
