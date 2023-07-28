@@ -8,6 +8,7 @@ class OnibusesController < ApplicationController
 
   # GET /onibuses/1 or /onibuses/1.json
   def show
+    @onibus = Onibus.find(params[:id])
   end
 
   # GET /onibuses/new
