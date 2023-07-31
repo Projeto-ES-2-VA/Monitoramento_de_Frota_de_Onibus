@@ -71,7 +71,4 @@ group :test do
   gem "webdrivers"
 end
 
-group :production do
-gem 'pg'
-gem 'activerecord-postgresql-adapter'
-end
+gem "ffi"
