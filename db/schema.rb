@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_185046) do
     t.string "chassi"
     t.string "modelo"
     t.integer "capacidade"
-    t.string "status"
+    t.boolean "status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
