@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   resources :onibuses
   resources :rota
-  resources :paradas
 
 
 end
