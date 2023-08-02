@@ -53,7 +53,7 @@
 
   <div>
     <%= form.label :onibus_id, style: "display: block" %>
-    <%= form.text_field :onibus_id %>
+    <%= form.collection_select :onibus_id, @onibus, :id, :placa, prompt: 'Selecione um ônibus'%>
   </div>
 
   <div>

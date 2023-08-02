@@ -13,6 +13,7 @@ class RotaController < ApplicationController
   # GET /rota/new
   def new
     @rotum = Rotum.new
+    @onibus = Onibus.all
   end
 
   # GET /rota/1/edit
