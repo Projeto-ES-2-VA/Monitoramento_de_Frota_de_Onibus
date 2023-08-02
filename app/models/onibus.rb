@@ -1,5 +1,5 @@
 class Onibus < ApplicationRecord
-  #has_many :rotum, dependent: :destroy
+  has_many :rotum, dependent: :destroy
 
   validates :placa, presence: true, length: {   is:8 }, format: { with: /\A[A-Z]{3}-\d{4}\z/ }
   validates :chassi, presence: true, length: { minimum: 17, maximum: 18}, uniqueness: { case_sensitive: false }
