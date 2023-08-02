@@ -65,6 +65,6 @@ class RotaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rotum_params
-      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :horario)
+      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :origem, :destino, :onibus_id)
     end
 end

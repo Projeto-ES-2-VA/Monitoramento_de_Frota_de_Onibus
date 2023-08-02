@@ -17,7 +17,7 @@ class RotaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create rotum" do
     assert_difference("Rotum.count") do
-      post rota_url, params: { rotum: { distancia: @rotum.distancia, duracao: @rotum.duracao, fim: @rotum.fim, horario: @rotum.horario, inicio: @rotum.inicio, nome: @rotum.nome, valor: @rotum.valor } }
+      post rota_url, params: { rotum: { destino: @rotum.destino, distancia: @rotum.distancia, duracao: @rotum.duracao, fim: @rotum.fim, inicio: @rotum.inicio, nome: @rotum.nome, onibus_id: @rotum.onibus_id, origem: @rotum.origem, valor: @rotum.valor } }
     end
 
     assert_redirected_to rotum_url(Rotum.last)
@@ -34,7 +34,7 @@ class RotaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update rotum" do
-    patch rotum_url(@rotum), params: { rotum: { distancia: @rotum.distancia, duracao: @rotum.duracao, fim: @rotum.fim, horario: @rotum.horario, inicio: @rotum.inicio, nome: @rotum.nome, valor: @rotum.valor } }
+    patch rotum_url(@rotum), params: { rotum: { destino: @rotum.destino, distancia: @rotum.distancia, duracao: @rotum.duracao, fim: @rotum.fim, inicio: @rotum.inicio, nome: @rotum.nome, onibus_id: @rotum.onibus_id, origem: @rotum.origem, valor: @rotum.valor } }
     assert_redirected_to rotum_url(@rotum)
   end
 
