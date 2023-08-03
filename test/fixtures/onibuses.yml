@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  placa: MyString
-  chassi: MyString
-  modelo: MyString
-  capacidade: 1
-  status: MyString
+  placa: AAA-1234
+  chassi: 12345678912345678
+  modelo: Modelo1
+  capacidade: 25
+  status: em operação
 
 two:
-  placa: MyString
-  chassi: MyString
-  modelo: MyString
-  capacidade: 1
-  status: MyString
+  placa: AAA-1235
+  chassi: 12345678912345679
+  modelo: Modelo2
+  capacidade: 26
+  status: em operação
