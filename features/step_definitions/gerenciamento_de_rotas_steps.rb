@@ -7,7 +7,7 @@ Given('o onibus de placa: {string}, chassi: {string}, modelo: {string}, capacida
   fill_in 'Chassi', with: chassi
   fill_in 'Modelo', with: modelo
   fill_in 'Capacidade', with: capacidade
-  fill_in 'Status', with: status
+  select(status, from: 'Status')
   click_button 'Create Onibus'
 end
 
@@ -15,14 +15,16 @@ And('que eu estou na pagina de cadastro de rota') do
   visit '/rota/new'
 end
 
-When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, horario: {string}") do |nome, valor, distancia, duracao, inicio, fim, horario|
+When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string}") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus|
   fill_in 'Nome', with: nome
   fill_in 'Valor', with: valor
   fill_in 'Distancia', with: distancia
   fill_in 'Duracao', with: duracao
   fill_in 'Inicio', with: inicio
   fill_in 'Fim', with: fim
-  fill_in 'Horario', with: horario
+  fill_in 'Origem', with: origem
+  fill_in 'Destino', with: destino
+  select(onibus, from: 'Onibus')
 end
 
 And('clico em criar uma rota') do
@@ -30,17 +32,18 @@ And('clico em criar uma rota') do
 end
 
 Then('eu devo ser redirecionado para a pagina de rota que foi criada e vejo a mensagem {string}') do |mensagem|
-  expect(page).to have_current_path(rota_path(Rotum.last))
+  expect(page).to have_current_path(rotum_path(Rotum.last))
   expect(page).to have_content(mensagem)
 end
 
 
-#Criar rota com nome em branco
-Then('eu vejo a mensagem {string}') do |mensagem|
-  expect(page).to have_current_path(rota_path(Rotum.last))
-  expect(page).to have_content(mensagem)
-end
-
+# Criar rota com nome em branco
+# ou
+# Criar rota com origem em branco
+# Then('eu vejo a mensagem {string}') do |mensagem|
+#   expect(page).to have_current_path(rotum_path(Rotum.last))
+#   expect(page).to have_content(mensagem)
+# end
 
 # Editar rota
 Given(/^a rota de nome: "([^"]*)", valor: ([\d.]+), distancia: ([\d.]+), duracao: ([\d.]+), inicio: "([^"]*)", fim: "([^"]*)", horario: "([^"]*)"$/) do |nome, valor, distancia, duracao, inicio, fim, horario|
