@@ -13,6 +13,7 @@ class RotaController < ApplicationController
   # GET /rota/new
   def new
     @rotum = Rotum.new
+    @onibus = Onibus.all
   end
 
   # GET /rota/1/edit
@@ -56,6 +57,17 @@ class RotaController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def buscar_por_onibus
+    @placas_onibus = Onibus.pluck(:placa)
+    @rotas = Rotum.joins(:onibus).where("onibuses.placa = ?", params[:placa])
+    puts @rotas.inspect # Adicione este log para verificar as rotas encontradas
+    render 'busca_por_onibus'
+  end
+
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
