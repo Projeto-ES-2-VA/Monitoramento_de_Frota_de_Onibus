@@ -21,10 +21,10 @@ class RotumTest < ActiveSupport::TestCase
     assert rota.destroy, "Falha ao excluir rota"
   end
 
-  test "atualizacao de inicio e fim de uma rota" do
+  test "atualizacao de inicio e fim invalidos de uma rota" do
     rota = rota(:one)
-    rota.inicio = "Ubatuba"
-    rota.fim = "Jacarepagua"
-    assert rota.save, "Falha ao salvar rota"
+    rota.inicio = Time.new(2000,01,01,15,0,0)
+    rota.fim = Time.new(2000,01,01,13,0,0)
+    assert_not rota.save, "Exito ao salvar rota"
   end
 end
