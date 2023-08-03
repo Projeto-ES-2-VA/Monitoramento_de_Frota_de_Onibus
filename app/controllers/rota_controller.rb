@@ -13,6 +13,7 @@ class RotaController < ApplicationController
   # GET /rota/new
   def new
     @rotum = Rotum.new
+    @onibus = Onibus.all
   end
 
   # GET /rota/1/edit
@@ -57,6 +58,17 @@ class RotaController < ApplicationController
     end
   end
 
+  def buscar_por_onibus
+    @placas_onibus = Onibus.pluck(:placa)
+    @rotas = Rotum.joins(:onibus).where("onibuses.placa = ?", params[:placa])
+    puts @rotas.inspect # Adicione este log para verificar as rotas encontradas
+    render 'busca_por_onibus'
+  end
+
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rotum
@@ -65,6 +77,6 @@ class RotaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rotum_params
-      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :horario)
+      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :origem, :destino, :onibus_id)
     end
 end

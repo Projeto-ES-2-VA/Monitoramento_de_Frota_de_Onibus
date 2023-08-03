@@ -14,12 +14,14 @@ class RotaTest < ApplicationSystemTestCase
     visit rota_url
     click_on "New rotum"
 
+    fill_in "Destino", with: @rotum.destino
     fill_in "Distancia", with: @rotum.distancia
     fill_in "Duracao", with: @rotum.duracao
     fill_in "Fim", with: @rotum.fim
-    fill_in "Horario", with: @rotum.horario
     fill_in "Inicio", with: @rotum.inicio
     fill_in "Nome", with: @rotum.nome
+    fill_in "Onibus", with: @rotum.onibus_id
+    fill_in "Origem", with: @rotum.origem
     fill_in "Valor", with: @rotum.valor
     click_on "Create Rotum"
 
@@ -31,12 +33,14 @@ class RotaTest < ApplicationSystemTestCase
     visit rotum_url(@rotum)
     click_on "Edit this rotum", match: :first
 
+    fill_in "Destino", with: @rotum.destino
     fill_in "Distancia", with: @rotum.distancia
     fill_in "Duracao", with: @rotum.duracao
     fill_in "Fim", with: @rotum.fim
-    fill_in "Horario", with: @rotum.horario
     fill_in "Inicio", with: @rotum.inicio
     fill_in "Nome", with: @rotum.nome
+    fill_in "Onibus", with: @rotum.onibus_id
+    fill_in "Origem", with: @rotum.origem
     fill_in "Valor", with: @rotum.valor
     click_on "Update Rotum"
 

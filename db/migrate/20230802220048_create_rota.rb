@@ -5,9 +5,11 @@ class CreateRota < ActiveRecord::Migration[7.0]
       t.float :valor
       t.float :distancia
       t.float :duracao
-      t.string :inicio
-      t.string :fim
-      t.time :horario
+      t.time :inicio
+      t.time :fim
+      t.string :origem
+      t.string :destino
+      t.references :onibus, null: false, foreign_key: true
 
       t.timestamps
     end

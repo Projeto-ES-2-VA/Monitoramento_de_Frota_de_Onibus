@@ -1,0 +1,28 @@
+<h1>Buscar Rotas por Placa do Ônibus</h1>
+
+<%= form_tag(buscar_por_onibus_path, method: :get) do %>
+  <div class="field">
+    <%= label_tag :placa, 'Placa do Ônibus:' %>
+    <%= select_tag :placa, options_for_select(@placas_onibus, params[:placa]) %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag 'Buscar' %>
+  </div>
+<% end %>
+
+<h1>Resultados da busca por placa do ônibus</h1>
+
+<% if @rotas.present? %>
+  <h2>Resultados:</h2>
+  <% @rotas.each do |rota| %>
+    <p>
+      Nome: <%= rota.nome %><br>
+      Valor: <%= rota.valor %><br>
+      Distância: <%= rota.distancia %><br>
+      <!-- ... outros campos ... -->
+    </p>
+  <% end %>
+<% else %>
+  <p>Nenhum resultado encontrado.</p>
+<% end %>

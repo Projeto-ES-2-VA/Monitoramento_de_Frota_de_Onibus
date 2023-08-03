@@ -32,9 +32,10 @@
   </div>
 
   <div>
-    <label for="bus_status">Status:</label>
-    <input type="checkbox" id="bus_status" name="bus[status]" checked>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, ["em operação", "indisponível", "em manutenção"] %>
   </div>
+  <br>
 
   <div>
     <%= form.submit %>
