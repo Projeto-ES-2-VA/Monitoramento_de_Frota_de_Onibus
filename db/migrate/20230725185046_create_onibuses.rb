@@ -5,7 +5,7 @@ class CreateOnibuses < ActiveRecord::Migration[7.0]
       t.string :chassi
       t.string :modelo
       t.integer :capacidade
-      t.boolean :status, default: true
+      t.string :status
 
       t.timestamps
     end
