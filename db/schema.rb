@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_25_185046) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_220048) do
   create_table "onibuses", force: :cascade do |t|
     t.string "placa"
     t.string "chassi"
@@ -36,11 +36,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_185046) do
     t.float "valor"
     t.float "distancia"
     t.float "duracao"
-    t.string "inicio"
-    t.string "fim"
-    t.time "horario"
+    t.time "inicio"
+    t.time "fim"
+    t.string "origem"
+    t.string "destino"
+    t.integer "onibus_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["onibus_id"], name: "index_rota_on_onibus_id"
   end
 
+  add_foreign_key "rota", "onibuses"
 end
