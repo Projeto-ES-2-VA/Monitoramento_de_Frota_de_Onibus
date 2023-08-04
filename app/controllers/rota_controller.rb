@@ -31,6 +31,7 @@ class RotaController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @rotum.errors, status: :unprocessable_entity }
+        @onibus = Onibus.all
       end
     end
   end
