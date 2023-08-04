@@ -25,16 +25,18 @@ Feature: Gerenciamento de rotas
 #    Then eu vejo a mensagem "A origem não pode ficar em branco"
 
   Scenario: editar rota com sucesso
-    Given a rota de nome: "Rota do Agreste", valor: 50.00, distancia: 120.5, duracao: 2.5, inicio: "Garanhuns", fim: "Caruaru", horario: "08:00"
+    Given o onibus de placa: "ABC-1234", chassi: "9BWGD21JX22512345", modelo: "Marcopolo Paradiso 1800 DD", capacidade: 50, status: "em operação" existe
+    And a rota de nome: "Rota do Agreste", valor: 50.00, distancia: 120.5, duracao: 2.5, inicio: "08:30", fim: "10:00", origem: "Garanhuns", destino: "Caruaru", onibus: "ABC-1234" existe
     And eu estou na pagina de listagem de rotas
     When eu acesso uma rota em especifico
     And eu clico para editar rota
-    And eu altero o campo nome com "Rota Agrestina"
+    And eu altero o campo inicio com "05:00" e fim com "08:00"
     And clico para atualizar rota
     Then aparece uma mensagem dizendo que a rota foi atualizada com sucesso
 
   Scenario: remover rota com sucesso
-    Given a rota de nome: "Rota do Agreste", valor: 50.00, distancia: 120.5, duracao: 2.5, inicio: "Garanhuns", fim: "Caruaru", horario: "08:00"
+    Given o onibus de placa: "ABC-1234", chassi: "9BWGD21JX22512345", modelo: "Marcopolo Paradiso 1800 DD", capacidade: 50, status: "em operação" existe
+    And a rota de nome: "Rota do Agreste", valor: 50.00, distancia: 120.5, duracao: 2.5, inicio: "08:30", fim: "10:00", origem: "Garanhuns", destino: "Caruaru", onibus: "ABC-1234" existe
     And eu estou na pagina de listagem de rotas
     When eu acesso uma rota em especifico
     And eu clico para excluir rota

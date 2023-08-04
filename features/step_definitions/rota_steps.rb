@@ -1,74 +1,76 @@
-# arquivo: features/step_definitions/busca_rotas_steps.rb
+require 'rspec/expectations'
 
 Given('que existem dados de rotas registrados no sistema') do
-  # Aqui você pode criar dados de rotas no banco de dados ou utilizar alguma biblioteca para isso.
-  # Por exemplo, você pode usar FactoryBot para criar registros de rotas fictícias.
-  FactoryBot.create_list(:rota, 5) # Exemplo: Cria 5 registros fictícios de rotas
+  onibus1 = Onibus.create(placa: 'ABC-1235', chassi: '12121212121212122', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
+  onibus2 = Onibus.create(placa: 'DEF-5678', chassi: '12121212121212123', modelo: 'Modelo B', capacidade: 40, status: 'em operação')
+
+  Rotum.create(nome: 'Rota 1', valor: 10.0, distancia: 100.0, duracao: 120, inicio: Time.now, fim: Time.now + 2.hours, origem: 'Origem 1', destino: 'Destino 1', onibus: onibus1)
+  Rotum.create(nome: 'Rota 2', valor: 15.0, distancia: 150.0, duracao: 180, inicio: Time.now, fim: Time.now + 3.hours, origem: 'Origem 2', destino: 'Destino 2', onibus: onibus2)
 end
+
 
 Given('um ônibus com a placa {string} já percorreu algumas rotas') do |placa|
-  # Aqui você pode criar um ônibus com a placa informada e associar algumas rotas a ele.
-  # Por exemplo, supondo que você tenha um modelo Bus e um modelo Rota, você pode fazer algo como:
-  bus = FactoryBot.create(:bus, placa: placa)
-  FactoryBot.create_list(:rota, 3, buses: [bus]) # Exemplo: Cria 3 registros fictícios de rotas e associa ao ônibus criado
+  @onibus = Onibus.create(placa: placa, chassi: '12121212121212121', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
+
+  Rotum.create(nome: 'Rota 1', valor: 10.0, distancia: 100.0, duracao: 120, inicio: Time.now, fim: Time.now + 2.hours, origem: 'Origem 1', destino: 'Destino 1', onibus: @onibus)
+  Rotum.create(nome: 'Rota 2', valor: 15.0, distancia: 150.0, duracao: 180, inicio: Time.now, fim: Time.now + 3.hours, origem: 'Origem 2', destino: 'Destino 2', onibus: @onibus)
 end
 
-When('eu informo a placa do ônibus como {string}') do |placa|
-  # Aqui você pode implementar a lógica para informar a placa do ônibus na sua aplicação.
-  # Por exemplo, supondo que você tenha um formulário para inserir a placa, você pode fazer algo como:
-  fill_in 'placa_do_onibus', with: placa
+When('eu informo a placa do ônibus com placa {string}') do |placa|
+
+  visit buscar_por_onibus_path
+  select placa, from: 'placa'
   click_button 'Buscar'
 end
 
 Then('o sistema exibe a lista de rotas percorridas pelo ônibus') do
-  # Aqui você pode implementar a verificação de que a lista de rotas do ônibus é exibida na tela.
-  # Por exemplo, supondo que você tenha uma página de exibição das rotas do ônibus, você pode fazer algo como:
-  expect(page).to have_content('Rota 1')
-  expect(page).to have_content('Rota 2')
-  expect(page).to have_content('Rota 3')
-  # Verifique se as rotas exibidas correspondem às rotas associadas ao ônibus informado.
+
+  expect(page).to have_content('Resultados:')
+
+
 end
 
-Then('o sistema exibe uma mensagem de erro informando que a placa é inválida') do
-  # Aqui você pode implementar a verificação de que uma mensagem de erro é exibida na tela.
-  # Por exemplo, supondo que você tenha um formulário de busca e um campo de placa inválida, você pode fazer algo como:
-  expect(page).to have_content('Placa inválida. Por favor, insira uma placa válida.')
+#####################################################################################################################
+
+
+Given('não existe dados de rotas registrados no sistema') do
 end
 
-Given('um ônibus com a placa {string} ainda não percorreu nenhuma rota') do |placa|
-  # Neste passo, você pode criar um ônibus com a placa informada sem associar nenhuma rota a ele.
-  # Por exemplo, supondo que você tenha um modelo Bus, você pode fazer algo como:
-  FactoryBot.create(:bus, placa: placa)
+Given('um ônibus com a placa {string} não percorreu nenhuma rota') do |placa|
+  Onibus.create(placa: placa, chassi: '12121212121212126', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
 end
 
-Then('o sistema exibe uma mensagem informando que o ônibus ainda não possui rotas registradas') do
-  # Aqui você pode implementar a verificação de que uma mensagem é exibida na tela.
-  # Por exemplo, supondo que você tenha uma página de exibição das rotas do ônibus, você pode fazer algo como:
-  expect(page).to have_content('Esse ônibus ainda não possui rotas registradas.')
-end
+When('eu informo a placa do ônibus cadastrado com a placa {string}') do |placa|
 
-When('eu informo a placa do ônibus em branco') do
-  # Aqui você pode implementar a lógica para informar uma placa em branco na sua aplicação.
-  # Por exemplo, supondo que você tenha um formulário para inserir a placa, você pode fazer algo como:
-  fill_in 'placa_do_onibus', with: ''
+  visit buscar_por_onibus_path
+  select placa, from: 'placa'
   click_button 'Buscar'
 end
 
-Then('o sistema exibe uma mensagem de erro informando que a placa deve ser preenchida') do
-  # Aqui você pode implementar a verificação de que uma mensagem de erro é exibida na tela.
-  # Por exemplo, supondo que você tenha um formulário de busca e um campo de placa vazio, você pode fazer algo como:
-  expect(page).to have_content('Por favor, preencha a placa do ônibus.')
+
+
+Then('o sistema exibe uma mensagem que nenhum resultado foi encontrado') do
+  expect(page).to have_content('Nenhum resultado encontrado.')
 end
 
-Given('não há registros de um ônibus com a placa {string}') do |placa|
-  # Neste passo, você pode verificar se não há registros de um ônibus com a placa informada no banco de dados.
-  # Por exemplo, supondo que você tenha um modelo Bus, você pode fazer algo como:
-  bus = Bus.find_by(placa: placa)
-  expect(bus).to be_nil
+#####################################
+
+Then('o sistema exibe uma mensagem informando que o ônibus não possui rotas cadastradas') do
+  pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('o sistema exibe uma mensagem informando que o ônibus com essa placa não foi encontrado') do
-  # Aqui você pode implementar a verificação de que uma mensagem é exibida na tela.
-  # Por exemplo, supondo que você tenha um formulário de busca e nenhum ônibus é encontrado com a placa informada, você pode fazer algo como:
-  expect(page).to have_content('Nenhum ônibus encontrado com a placa informada.')
+Given('um ônibus com a placa {string} já percorreu várias rotas') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('o sistema exibe a lista de todas as rotas percorridas pelo ônibus') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('um ônibus com a placa {string} já percorreu uma única rota') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('o sistema exibe a lista com os detalhes da rota percorrida pelo ônibus') do
+  pending # Write code here that turns the phrase above into concrete actions
 end

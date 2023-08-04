@@ -282,6 +282,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.2.2)
   rspec
+  rspec-expectations
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
