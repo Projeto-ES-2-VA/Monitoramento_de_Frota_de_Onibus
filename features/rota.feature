@@ -1,27 +1,34 @@
-Feature: Gerenciamento de onibus
-  As a Usuario do sistema
-  I want to registrar, editar e remover um onibus
-  So that eu mantenha a frota de onibus atualizada
+Feature: Busca de rotas
+  Como um usuário do sistema
+  Eu quero buscar as rotas que um ônibus já percorreu informando sua placa
+  Para que eu saiba por onde cada ônibus da frota já passou
 
-Scenario: Registro de onibus no sistema
-  Given que eu sou um Usuario do sistema
-  When eu acesso a pagina de registro de onibus
-  And preencho as informacoes do onibus: placa 'ABC1234', modelo 'Volvo 9700', ano '2022', capacidade '50'
-  And clico no botao de registro
-  Then vejo uma mensagem de confirmacao de registro do onibus
+  Scenario: Busca de rotas de um ônibus com resultado válido
+    Given que existem dados de rotas registrados no sistema
+    And um ônibus com a placa "ABC-1234" já percorreu algumas rotas
+    When eu informo a placa do ônibus com placa "ABC-1234"
+    Then o sistema exibe a lista de rotas percorridas pelo ônibus
 
-Scenario: Edicao de informacoes de um onibus
-  Given que eu sou um Usuario do sistema
-  And existe um onibus registrado com placa 'XYZ5678'
-  When eu acesso a pagina de edicao de onibus para a placa 'XYZ5678'
-  And atualizo as informacoes do onibus: modelo 'Mercedes-Benz O500', ano '2023'
-  And clico no botao de atualizacao
-  Then vejo uma mensagem de confirmacao de atualizacao das informacoes do onibus
+  Scenario: Busca de rotas de um ônibus com resultado inválido
+    Given não existe dados de rotas registrados no sistema
+    And um ônibus com a placa "ABC-4321" não percorreu nenhuma rota
+    When eu informo a placa do ônibus cadastrado com a placa "ABC-4321"
+    Then o sistema exibe uma mensagem que nenhum resultado foi encontrado
 
-Scenario: Remocao de um onibus do sistema
-  Given que eu sou um Usuario do sistema
-  And existe um onibus registrado com placa 'JKL9012'
-  When eu acesso a pagina de gerenciamento de onibus
-  And seleciono a opcao de remover o onibus com placa 'JKL9012'
-  And confirmo a remocao
-  Then vejo uma mensagem de confirmacao de remocao do onibus
+  Scenario: Busca de rotas de um ônibus com resultado válido, mas sem rotas cadastradas
+    Given que existem dados de rotas registrados no sistema
+    And um ônibus com a placa "XYZ-7890" não percorreu nenhuma rota
+    When eu informo a placa do ônibus com placa "XYZ-7890"
+    Then o sistema exibe uma mensagem informando que o ônibus não possui rotas cadastradas
+
+  Scenario: Busca de rotas de um ônibus com resultado válido, com mais de duas rotas cadastradas
+    Given que existem dados de rotas registrados no sistema
+    And um ônibus com a placa "DEF-5678" já percorreu várias rotas
+    When eu informo a placa do ônibus com placa "DEF-5678"
+    Then o sistema exibe a lista de todas as rotas percorridas pelo ônibus
+
+  Scenario: Busca de rotas de um ônibus com resultado válido, com apenas uma rota cadastrada
+    Given que existem dados de rotas registrados no sistema
+    And um ônibus com a placa "GHI-9012" já percorreu uma única rota
+    When eu informo a placa do ônibus com placa "GHI-9012"
+    Then o sistema exibe a lista com os detalhes da rota percorrida pelo ônibus

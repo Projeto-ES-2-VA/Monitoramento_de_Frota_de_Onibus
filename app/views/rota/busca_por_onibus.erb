@@ -3,7 +3,7 @@
 <%= form_tag(buscar_por_onibus_path, method: :get) do %>
   <div class="field">
     <%= label_tag :placa, 'Placa do Ônibus:' %>
-    <%= select_tag :placa, options_for_select(@placas_onibus, params[:placa]) %>
+    <%= select_tag :placa, options_for_select(@placas_onibus) %>
   </div>
 
   <div class="actions">
