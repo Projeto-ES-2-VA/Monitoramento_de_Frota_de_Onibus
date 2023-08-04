@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_220048) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "paradas", force: :cascade do |t|
+    t.integer "numero"
+    t.string "nome"
+    t.string "rua"
+    t.string "bairro"
+    t.string "cep"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rota", force: :cascade do |t|
     t.string "nome"
     t.float "valor"
