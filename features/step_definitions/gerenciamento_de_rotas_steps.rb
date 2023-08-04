@@ -1,7 +1,6 @@
 # Criar rota com sucesso
 Given('o onibus de placa: {string}, chassi: {string}, modelo: {string}, capacidade: {int}, status: {string} existe') do |placa, chassi, modelo, capacidade, status|
 
-  # Nao consegui colocar o status como boolean, ta dando problema no .feature
   visit '/onibuses/new'
   fill_in 'Placa', with: placa
   fill_in 'Chassi', with: chassi
