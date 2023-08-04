@@ -42,7 +42,12 @@ Given('que existem duas rotas registrados no sistema para a placa {string}') do 
   expect(page).to have_content("nome 2")
 end
 
-And("eu visito a pagina de busca de rotas por onibus") do
+# And("eu visito a pagina de buscar rotas por onibus") do
+#   visit buscar_por_onibus_path
+#   expect(page).to have_content("Buscar")
+# end
+
+Given("eu visito a pagina de buscar rotas por onibus") do
   visit buscar_por_onibus_path
   expect(page).to have_content("Buscar")
 end
@@ -58,9 +63,6 @@ Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
   expect(page).to have_content('nome 2')
 end
 
-#####################################################################################################################
-
-
 Given ("um onibus com a placa {string} nao percorreu nenhuma rota") do |placa|           # features/rota.feature:13
   fill_in "Field",	with: "sometext"
 end
@@ -71,36 +73,15 @@ Given('um onibus com a placa {string} nao percorreu nenhuma rota') do |placa|
 end
 
 When('eu informo a placa do onibus cadastrado com a placa {string}') do |placa|
-
   visit buscar_por_onibus_path
   select placa, from: 'placa'
   click_button 'Buscar'
 end
 
-
-
-Then('o sistema exibe uma mensagem que nenhum resultado foi encontrado') do
+Then('o sistema exibe uma mensagem informando que nenhum resultado foi encontrado') do
   expect(page).to have_content('Nenhum resultado encontrado.')
 end
 
-#####################################
-
-Then('o sistema exibe uma mensagem informando que o onibus nao possui rotas cadastradas') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('um onibus com a placa {string} ja percorreu várias rotas') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('o sistema exibe a lista de todas as rotas percorridas pelo onibus') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('um onibus com a placa {string} ja percorreu uma unica rota') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('o sistema exibe a lista com os detalhes da rota percorrida pelo onibus') do
-  pending # Write code here that turns the phrase above into concrete actions
+And ('eu clico no botao buscar') do
+  click_button 'Buscar'
 end
