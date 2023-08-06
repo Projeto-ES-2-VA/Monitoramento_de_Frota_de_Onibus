@@ -11,7 +11,7 @@ jobs:
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5s
+          --health-retries 5
         env:
           POSTGRES_PASSWORD: password
     steps:
@@ -24,31 +24,31 @@ jobs:
           ruby-version: 3.1.1
 
       - name: Install PostgreSQL client
-        run:
+        run: |
           sudo apt-get -yqq install libpq-dev
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
         with:
-           path: vendor/bundle
-           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-           restore-keys: |
-             ${{ runner.os }}-gems-
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: Bundle Install
-        run:
+        run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
       - name: Run Tests
-         env:
-           PG_DATABASE: postgres
-           PG_HOST: localhost
-           PG_USER: postgres
-           PG_PASSWORD: password
-           RAILS_ENV: actions
-           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-           WITH_COVERAGE: true
-           DISABLE_SPRING: 1
-         run: |
-           bundle exec rails db:prepare
+        env:
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_USER: postgres
+          PG_PASSWORD: password
+          RAILS_ENV: actions
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          WITH_COVERAGE: true
+          DISABLE_SPRING: 1
+        run: |
+          bundle exec rails db:prepare
