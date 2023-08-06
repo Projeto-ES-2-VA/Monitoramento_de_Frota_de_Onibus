@@ -1,0 +1,2 @@
+class Motoristum < Usuario
+end
