@@ -1,76 +1,87 @@
 require 'rspec/expectations'
 
-Given('que existem dados de rotas registrados no sistema') do
-  onibus1 = Onibus.create(placa: 'ABC-1235', chassi: '12121212121212122', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
-  onibus2 = Onibus.create(placa: 'DEF-5678', chassi: '12121212121212123', modelo: 'Modelo B', capacidade: 40, status: 'em operação')
-
-  Rotum.create(nome: 'Rota 1', valor: 10.0, distancia: 100.0, duracao: 120, inicio: Time.now, fim: Time.now + 2.hours, origem: 'Origem 1', destino: 'Destino 1', onibus: onibus1)
-  Rotum.create(nome: 'Rota 2', valor: 15.0, distancia: 150.0, duracao: 180, inicio: Time.now, fim: Time.now + 3.hours, origem: 'Origem 2', destino: 'Destino 2', onibus: onibus2)
+Given('dado que existe um onibus com placa {string}') do |placa|
+  visit '/onibuses/new'
+  fill_in 'Placa', with: placa
+  fill_in 'Chassi', with: "11111111111111111"
+  fill_in 'Modelo', with: "modelo"
+  fill_in 'Capacidade', with: 50
+  select("em operação", from: 'Status')
+  click_button 'Create Onibus'
+  expect(page).to have_content(placa)
 end
 
+Given('que existem duas rotas registrados no sistema para a placa {string}') do |placa|
+  visit '/rota/new'
+  fill_in 'Nome', with: "nome 1"
+  fill_in 'Valor', with: 10
+  fill_in 'Distancia', with: 10
+  fill_in 'Duracao', with: 10
+  fill_in 'Inicio', with: "7:00"
+  fill_in 'Fim', with: "10:00"
+  fill_in 'Origem', with: "origem"
+  fill_in 'Destino', with: "destino"
+  select(placa, from: 'Onibus')
 
-Given('um ônibus com a placa {string} já percorreu algumas rotas') do |placa|
-  @onibus = Onibus.create(placa: placa, chassi: '12121212121212121', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
+  click_button 'Create Rotum'
 
-  Rotum.create(nome: 'Rota 1', valor: 10.0, distancia: 100.0, duracao: 120, inicio: Time.now, fim: Time.now + 2.hours, origem: 'Origem 1', destino: 'Destino 1', onibus: @onibus)
-  Rotum.create(nome: 'Rota 2', valor: 15.0, distancia: 150.0, duracao: 180, inicio: Time.now, fim: Time.now + 3.hours, origem: 'Origem 2', destino: 'Destino 2', onibus: @onibus)
+  visit '/rota/new'
+  fill_in 'Nome', with: "nome 2"
+  fill_in 'Valor', with: 10
+  fill_in 'Distancia', with: 10
+  fill_in 'Duracao', with: 10
+  fill_in 'Inicio', with: "11:00"
+  fill_in 'Fim', with: "14:00"
+  fill_in 'Origem', with: "origem 2"
+  fill_in 'Destino', with: "destino 2"
+  select(placa, from: 'Onibus')
+
+  click_button 'Create Rotum'
+
+  visit '/rota'
+  expect(page).to have_content("nome 2")
 end
 
-When('eu informo a placa do ônibus com placa {string}') do |placa|
+# And("eu visito a pagina de buscar rotas por onibus") do
+#   visit buscar_por_onibus_path
+#   expect(page).to have_content("Buscar")
+# end
 
+Given("eu visito a pagina de buscar rotas por onibus") do
   visit buscar_por_onibus_path
+  expect(page).to have_content("Buscar")
+end
+
+When('eu informo a placa {string} do onibus') do |placa|
   select placa, from: 'placa'
   click_button 'Buscar'
 end
 
-Then('o sistema exibe a lista de rotas percorridas pelo ônibus') do
-
-  expect(page).to have_content('Resultados:')
-
-
+Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
+  expect(page).to have_content('Resultados')
+  expect(page).to have_content('nome 1')
+  expect(page).to have_content('nome 2')
 end
 
-#####################################################################################################################
-
-
-Given('não existe dados de rotas registrados no sistema') do
+Given ("um onibus com a placa {string} nao percorreu nenhuma rota") do |placa|           # features/rota.feature:13
+  fill_in "Field",	with: "sometext"
 end
 
-Given('um ônibus com a placa {string} não percorreu nenhuma rota') do |placa|
+
+Given('um onibus com a placa {string} nao percorreu nenhuma rota') do |placa|
   Onibus.create(placa: placa, chassi: '12121212121212126', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
 end
 
-When('eu informo a placa do ônibus cadastrado com a placa {string}') do |placa|
-
+When('eu informo a placa do onibus cadastrado com a placa {string}') do |placa|
   visit buscar_por_onibus_path
   select placa, from: 'placa'
   click_button 'Buscar'
 end
 
-
-
-Then('o sistema exibe uma mensagem que nenhum resultado foi encontrado') do
+Then('o sistema exibe uma mensagem informando que nenhum resultado foi encontrado') do
   expect(page).to have_content('Nenhum resultado encontrado.')
 end
 
-#####################################
-
-Then('o sistema exibe uma mensagem informando que o ônibus não possui rotas cadastradas') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('um ônibus com a placa {string} já percorreu várias rotas') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('o sistema exibe a lista de todas as rotas percorridas pelo ônibus') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('um ônibus com a placa {string} já percorreu uma única rota') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('o sistema exibe a lista com os detalhes da rota percorrida pelo ônibus') do
-  pending # Write code here that turns the phrase above into concrete actions
+And ('eu clico no botao buscar') do
+  click_button 'Buscar'
 end
