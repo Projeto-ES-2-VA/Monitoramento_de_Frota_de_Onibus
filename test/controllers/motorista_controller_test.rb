@@ -17,7 +17,7 @@ class MotoristaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create motoristum" do
     assert_difference("Motoristum.count") do
-      post motorista_url, params: { motoristum: { cnh: @motoristum.cnh } }
+      post motorista_url, params: { motoristum: { cnh: @motoristum.cnh, cpf: @motoristum.cpf, email: @motoristum.email, nome: @motoristum.nome, senha: @motoristum.senha, telefone: @motoristum.telefone } }
     end
 
     assert_redirected_to motoristum_url(Motoristum.last)
@@ -34,7 +34,7 @@ class MotoristaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update motoristum" do
-    patch motoristum_url(@motoristum), params: { motoristum: { cnh: @motoristum.cnh } }
+    patch motoristum_url(@motoristum), params: { motoristum: { cnh: @motoristum.cnh, cpf: @motoristum.cpf, email: @motoristum.email, nome: @motoristum.nome, senha: @motoristum.senha, telefone: @motoristum.telefone } }
     assert_redirected_to motoristum_url(@motoristum)
   end
 

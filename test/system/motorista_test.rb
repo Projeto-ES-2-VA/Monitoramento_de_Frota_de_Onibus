@@ -15,6 +15,11 @@ class MotoristaTest < ApplicationSystemTestCase
     click_on "New motoristum"
 
     fill_in "Cnh", with: @motoristum.cnh
+    fill_in "Cpf", with: @motoristum.cpf
+    fill_in "Email", with: @motoristum.email
+    fill_in "Nome", with: @motoristum.nome
+    fill_in "Senha", with: @motoristum.senha
+    fill_in "Telefone", with: @motoristum.telefone
     click_on "Create Motoristum"
 
     assert_text "Motoristum was successfully created"
@@ -26,6 +31,11 @@ class MotoristaTest < ApplicationSystemTestCase
     click_on "Edit this motoristum", match: :first
 
     fill_in "Cnh", with: @motoristum.cnh
+    fill_in "Cpf", with: @motoristum.cpf
+    fill_in "Email", with: @motoristum.email
+    fill_in "Nome", with: @motoristum.nome
+    fill_in "Senha", with: @motoristum.senha
+    fill_in "Telefone", with: @motoristum.telefone
     click_on "Update Motoristum"
 
     assert_text "Motoristum was successfully updated"

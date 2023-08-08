@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_220048) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_210318) do
+  create_table "motorista", force: :cascade do |t|
+    t.string "cnh"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "onibuses", force: :cascade do |t|
     t.string "placa"
     t.string "chassi"
@@ -34,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_220048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["onibus_id"], name: "index_rota_on_onibus_id"
+  end
+
+  create_table "usuarios", force: :cascade do |t|
+    t.string "nome"
+    t.string "cpf"
+    t.string "email"
+    t.string "senha"
+    t.string "telefone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "rota", "onibuses"

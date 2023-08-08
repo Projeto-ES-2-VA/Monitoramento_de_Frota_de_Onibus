@@ -65,6 +65,6 @@ class MotoristaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def motoristum_params
-      params.require(:motoristum).permit(:cnh)
+      params.require(:motoristum).permit(:nome, :cpf, :email, :senha, :telefone, :cnh)
     end
 end
