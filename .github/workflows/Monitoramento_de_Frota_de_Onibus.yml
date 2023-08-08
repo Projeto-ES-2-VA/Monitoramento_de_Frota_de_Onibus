@@ -1,20 +1,8 @@
-on: [push, pull_request_target]
+on: [push, pull_request]
 
 jobs:
-  tests:
-    name: Run Tests
+  test:
     runs-on: ubuntu-latest
-    
-    env:
-      PG_DATABASE: postgres
-      PG_HOST: localhost
-      PG_USER: postgres
-      PG_PASSWORD: password
-      RAILS_ENV: actions
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      WITH_COVERAGE: true
-      DISABLE_SPRING: 1
-
     services:
       postgres:
         image: postgres:latest
@@ -23,9 +11,11 @@ jobs:
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 5s
         env:
           POSTGRES_PASSWORD: password
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          SECRET_KEY_BASE: EcGb5oyEhKaAooTuaTXt7fE25VEXEvLoVZqbXWt0UaulRVuNdaexZzju57Zk3LUiZRiXtYpBXEFql6Md4grRUf+wotohCjt/jSBUg51F3Tt9Dr0Rsy0WGTCDfAgW2t6Tfka4wKrblE3YcHrOa++NO1Q/+eOkI60YhwZAx7842yx/2tmt5EcX3f2P52jQNybCHo38Gcb+0yID05LCXRqVZ1BPFNgNkrn72Xbp6IbbpZ/xj/Tp8ztFFfr/E7oLMUpE8/aHwzbGIh2KdP4Kp9FdFdHlT0Nn31K7ZLBdnm/+RUPnuxI1Ku/hZeceL81cJ/4ahz3gIFiWbwBj08STesE7iFl0bD+fBGE1xr/VIFFppbVROk4mpzgnIU79MQqgcDJapajXZVNAThRHKonfWWwPKf/K6W/IsI2sNJHQ--DrZbXnbRfHaPEQ6h--jDM6ZtiVQkkaYQomVcej4Q==
 
     steps:
       - name: Checkout Repository
