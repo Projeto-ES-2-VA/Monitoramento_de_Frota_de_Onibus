@@ -1,2 +1,2 @@
-class Motoristum < Usuario
+class Motoristum < ApplicationRecord
 end
