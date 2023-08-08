@@ -74,8 +74,5 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end
-group :actions, :production do
-  gem 'pg'
-  gem 'activerecord-postgresql-adapter'
-end
+
 gem "ffi"
