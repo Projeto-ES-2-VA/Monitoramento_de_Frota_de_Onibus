@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   resources :onibuses
   resources :rota
-  #resources :usuarios
 
 
 end
