@@ -58,8 +58,24 @@ class OnibusesController < ApplicationController
     end
   end
 
+  def search
+    @results = []
+    data = params[:data]
+    @param = params[:param]
+    case @param
+      when "Placa"
+        @results = Onibus.where("onibuses.placa LIKE ?", "%#{data}%")
+      when "Chassi"
+        @results = Onibus.where("onibuses.chassi LIKE ?", "%#{data}%")
+      when "Modelo"
+        @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
+    end
+    render 'busca'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_onibus
       @onibus = Onibus.find(params[:id])
     end
