@@ -1,0 +1,18 @@
+<h1>Buscar Motoristas</h1>
+
+<%= form_tag buscar_motorista_motorista_path, method: :get do %>
+  <%= label_tag :query, "Digite o nome, CPF ou email do motorista:" %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Buscar" %>
+<% end %>
+
+<% if @results.any? %>
+  <h2>Resultados da Busca:</h2>
+  <ul>
+    <% @results.each do |motorista| %>
+      <li><%= motorista.nome %> - <%= motorista.cpf %> - <%= motorista.email %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhum motorista encontrado.</p>
+<% end %>
