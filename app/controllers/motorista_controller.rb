@@ -57,6 +57,11 @@ class MotoristaController < ApplicationController
     end
   end
 
+  def buscar_motorista
+    query = params[:query]
+    @results = Motoristum.where("nome LIKE  ? OR cpf = ? OR email = ?", "%#{query}%", query, query)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_motoristum
