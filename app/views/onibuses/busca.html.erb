@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Onibus</h1>
+
+<%= form_tag buscar_onibus_path, method: :get do %>
+  <%= label_tag :data, "Busca:" %>
+  <%= text_field_tag :data, params[:data] %>
+  <br><br>
+  <%= label_tag :chassi, "Chassi:" %>
+  <%= radio_button_tag(:param, "Chassi", checked = true) %>
+  <%= label_tag :modelo, "Modelo:" %>
+  <%= radio_button_tag(:param, "Modelo") %>
+  <%= label_tag :placa, "Placa:" %>
+  <%= radio_button_tag(:param, "Placa") %>
+  <br><br>
+  <%= submit_tag "Buscar" %>
+<% end %>
+
+
+<% if @results.any? %>
+  <h2>Resultados da Busca por <%=@param%>:</h2>
+  <div id="onibuses">
+  <% @results.each do |onibus| %>
+    <%= render onibus %>
+    <p>
+      <%= link_to "Show this onibus", onibus %>
+    </p>
+  <% end %>
+</div>
+<% else %>
+  <p>Nenhum onibus encontrado.</p>
+<% end %>
