@@ -1,5 +1,6 @@
 class Rotum < ApplicationRecord
   belongs_to :onibus
+  belongs_to :motoristum
 
   validates :nome, presence: { message: "O nome deve ser preenchido" }
   validates :valor, numericality: { greater_than_or_equal_to: 0, message: "O valor deve ser maior ou igual a zero" }

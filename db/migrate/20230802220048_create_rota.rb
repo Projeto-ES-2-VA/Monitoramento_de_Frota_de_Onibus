@@ -10,7 +10,7 @@ class CreateRota < ActiveRecord::Migration[7.0]
       t.string :origem
       t.string :destino
       t.references :onibus, null: false, foreign_key: true
-
+      t.references :motoristum, null: false, foreign_key: true
       t.timestamps
     end
   end
