@@ -6,7 +6,7 @@ Feature: Gerenciamento de Motorista
   Scenario: Registro de motorista com informacoes validas
     Given eu que sou um usuario do sistema
     When eu acesso a pagina de registro do motorista
-    And o motorista de nome: "Jose", cpf: "12345678910", email: "jose@gmail.com", senha: "123456", telefone: "11123456789" , e cnh: "1234567891", existe
+    And o motorista de nome: "Jose Almeida", cpf: "12345678910", email: "jose@gmail.com", senha: "123456!", telefone: "11123456789" , e cnh: "1234567891", existe
     And clico no botao para cadastrar o motorista
     Then vejo uma mensagem de confirmacao de registro do motorista
 

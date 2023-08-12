@@ -27,16 +27,16 @@ Then('vejo uma mensagem de confirmacao de registro do motorista') do
 end
 
 Then('vejo uma mensagem informando que nao e possivel cadastrar o motorista') do
-  expect(page).to have_content('11 errors prohibited this motoristum from being saved:')
+  expect(page).to have_content('16 errors prohibited this motoristum from being saved:')
 end
 
 #REGISTRAR COM DADOS INVALIDOS
 Given('existe um motorista registrado com cpf {string}') do |cpf|
   visit '/motorista/new'
-  fill_in 'Nome', with: 'Almeida'
+  fill_in 'Nome', with: 'Henrique Almeida'
   fill_in 'Cpf', with: cpf
   fill_in 'Email', with: 'almeida@gmail.com'
-  fill_in 'Senha', with: '123456'
+  fill_in 'Senha', with: '12345@'
   fill_in 'Telefone', with: '11123456789'
   fill_in 'Cnh', with: '0123456789'
   click_button 'Create Motoristum'
