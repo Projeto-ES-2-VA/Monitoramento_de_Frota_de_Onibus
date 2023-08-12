@@ -10,6 +10,7 @@ Feature: Busca de onibus
     When seleciona a caracteristica placa para buscar
     And clica em buscar
     Then aparece o onibus desejado
+    
   Scenario: buscar onibus por modelo
     Given o onibus de placa: "ABC-1234", chassi: "9BWGD21JX22512345", modelo: "Marcopolo Paradiso 1800 DD", capacidade: 50, status: "em operação" foi criado
     And o usuario esta na pagina de busca de onibus

@@ -18,7 +18,7 @@ end
 
 When("seleciona a caracteristica placa para buscar") do
   expect(page).to have_content('Placa:')
-  # choose("Placa")
+  choose("param_Placa")
 end
 
 And("clica em buscar") do
@@ -26,8 +26,7 @@ And("clica em buscar") do
 end
 
 Then("aparece o onibus desejado") do
-  # expect(page).to have_content('Resultados da Busca por Placa:')
-  # Tirar do comentario assim que resolver os passos com "choose"
+  expect(page).to have_content('Resultados da Busca por ')
 end
 
 And("digita o modelo do onibus que deseja buscar") do
@@ -36,7 +35,7 @@ end
 
 When("seleciona a caracteristica modelo para buscar") do
   expect(page).to have_content('Modelo:')
-  # choose('Modelo:')
+  choose('param_Modelo')
 end
 
 And("digita o chassi do onibus que deseja buscar") do
@@ -45,7 +44,7 @@ end
 
 When("seleciona a caracteristica chassi para buscar") do
   expect(page).to have_content('Chassi:')
-  # choose('Chassi:')
+  choose('param_Chassi')
 end
 
 And("digita uma placa da qual nao existe no banco de dados") do
