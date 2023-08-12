@@ -1,6 +1,8 @@
 class RotaController < ApplicationController
   before_action :set_rotum, only: %i[ show edit update destroy ]
 
+  def home
+  end
   # GET /rota or /rota.json
   def index
     @rota = Rotum.all

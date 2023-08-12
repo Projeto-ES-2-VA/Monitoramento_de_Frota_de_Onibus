@@ -1,6 +1,8 @@
 class MotoristaController < ApplicationController
   before_action :set_motoristum, only: %i[ show edit update destroy ]
 
+  def home
+  end
   # GET /motorista or /motorista.json
   def index
     @motorista = Motoristum.all
