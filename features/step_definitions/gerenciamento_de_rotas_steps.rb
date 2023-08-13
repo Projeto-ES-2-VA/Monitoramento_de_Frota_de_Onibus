@@ -8,13 +8,28 @@ Given('o onibus de placa: {string}, chassi: {string}, modelo: {string}, capacida
   fill_in 'Capacidade', with: capacidade
   select(status, from: 'Status')
   click_button 'Create Onibus'
+
+end
+
+And('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {string}, telefone: {string} , e cnh: {string} existe') do |nome, cpf, email, senha, telefone, cnh|
+
+  visit '/motorista/new'
+  fill_in "motoristum[nome]", with: nome
+  fill_in "motoristum[cpf]", with: cpf
+  fill_in "motoristum[email]", with: email
+  fill_in "motoristum[senha]", with: senha
+  fill_in "motoristum[telefone]", with: telefone
+  fill_in "motoristum[cnh]", with: cnh
+  click_button "Create Motoristum"
+
+  expect(page).to have_content("Motoristum was successfully created.")
 end
 
 And('que eu estou na pagina de cadastro de rota') do
   visit '/rota/new'
 end
 
-When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string}") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus|
+When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string} e o motorista: {string}") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus, motorista|
   fill_in 'Nome', with: nome
   fill_in 'Valor', with: valor
   fill_in 'Distancia', with: distancia
@@ -24,6 +39,7 @@ When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string},
   fill_in 'Origem', with: origem
   fill_in 'Destino', with: destino
   select(onibus, from: 'Onibus')
+  select(motorista, from: 'Motoristum')
 end
 
 And('clico em criar uma rota') do
@@ -40,12 +56,11 @@ end
 # ou
 # Criar rota com origem em branco
 Then('eu vejo a mensagem {string}') do |mensagem|
-  expect(page).to have_current_path(rotum_path(Rotum.last))
   expect(page).to have_content(mensagem)
 end
 
 # Editar rota
-Given("a rota de nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string} existe") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus|
+Given("a rota de nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string} e o motorista: {string} existe") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus, motorista|
   visit '/rota/new'
   fill_in 'Nome', with: nome
   fill_in 'Valor', with: valor
@@ -56,6 +71,7 @@ Given("a rota de nome: {string}, valor: {float}, distancia: {float}, duracao: {f
   fill_in 'Origem', with: origem
   fill_in 'Destino', with: destino
   select(onibus, from: 'Onibus')
+  select(motorista, from: 'Motoristum')
   click_button 'Create Rotum'
 end
 
