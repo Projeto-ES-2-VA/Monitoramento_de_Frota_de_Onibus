@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Ruby
+      - name: Setup Ruby and Install Bundler
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.1
