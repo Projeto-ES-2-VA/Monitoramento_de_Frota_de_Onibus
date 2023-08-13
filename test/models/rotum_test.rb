@@ -11,7 +11,8 @@ class RotumTest < ActiveSupport::TestCase
       fim: Time.new(2000,01,01,16,0,0),
       origem: "Cidade1",
       destino: "Cidade2",
-      onibus: onibuses(:one)
+      onibus: onibuses(:one),
+      motoristum: motorista(:one)
     )
     assert rota.save, "Falha ao salvar rota"
   end

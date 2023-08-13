@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  nome: MyString
-  cpf: MyString
-  email: MyString
-  senha: MyString
-  telefone: MyString
-  cnh: MyString
+  nome: Henrique Almeida
+  cpf: 11111111111
+  email: henriquealmeida@gmail.com
+  senha: 12345@
+  telefone: 12345678910
+  cnh: 1234567890
 
 two:
-  nome: MyString
-  cpf: MyString
-  email: MyString
-  senha: MyString
-  telefone: MyString
-  cnh: MyString
+  nome: Roberto Carlos
+  cpf: 11111111118
+  email: roberto.carlos@email.com
+  senha: 12345@
+  telefone: 12345678919
+  cnh: 1234567896
