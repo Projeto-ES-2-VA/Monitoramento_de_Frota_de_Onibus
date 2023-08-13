@@ -10,6 +10,7 @@ one:
   origem: Cidade1
   destino: Cidade2
   onibus: one
+  motoristum: one
 
 two:
   nome: Rota2
@@ -21,3 +22,4 @@ two:
   origem: Cidade2
   destino: Cidade1
   onibus: two
+  motoristum: two
