@@ -9,3 +9,10 @@ Feature: Busca de motorista
     And digita o nome do motorista que deseja buscar
     And clica no botao buscar
     Then aparece o motorista desejado
+
+  Scenario: buscar motorista por cpf
+    Given o motorista de nome: "Maria Josefa", cpf: "11578944433", email: "teste2@cucumber.com", senha: "456789963@", telefone: "81998833627", e cnh: "1234567890" foi criado
+    And o usuario esta na pagina de busca de motorista
+    And digita o cpf do motorista que deseja buscar
+    And clica no botao buscar
+    Then aparece o motorista desejado buscado por cpf
