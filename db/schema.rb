@@ -42,13 +42,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_024327) do
     t.string "origem"
     t.string "destino"
     t.integer "onibus_id", null: false
-    t.integer "motoristum_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["motoristum_id"], name: "index_rota_on_motoristum_id"
     t.index ["onibus_id"], name: "index_rota_on_onibus_id"
   end
 
-  add_foreign_key "rota", "motorista"
   add_foreign_key "rota", "onibuses"
 end
