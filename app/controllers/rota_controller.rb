@@ -77,6 +77,7 @@ class RotaController < ApplicationController
     def set_rotum
       @rotum = Rotum.find(params[:id])
       @onibus = Onibus.all
+      @motorista = Motoristum.all
     end
 
     # Only allow a list of trusted parameters through.

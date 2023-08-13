@@ -10,6 +10,7 @@ class MotoristaController < ApplicationController
 
   # GET /motorista/1 or /motorista/1.json
   def show
+    @motorista = Motoristum.find(params[:id])
   end
 
   # GET /motorista/new
