@@ -45,6 +45,10 @@ And('digita um cpf que nao existe no banco de dados') do
   fill_in 'Digite o nome, CPF ou email do motorista', with: "11578944400"
 end
 
+And('digita um email que nao existe no banco de dados') do
+  fill_in 'Digite o nome, CPF ou email do motorista', with: "inesbrasil@cucumber.com"
+end
+
 Then('aparece a mensagem de que nenhum motorista foi encontrado') do
   expect(page).to have_content('Nenhum motorista encontrado.')
 end
