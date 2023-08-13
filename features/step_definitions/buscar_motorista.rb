@@ -32,3 +32,11 @@ end
 Then('aparece o motorista desejado buscado por cpf') do
   expect('/motorista/buscar_motorista?query=11578944433&commit=Buscar ')
 end
+
+And('digita o email do motorista que deseja buscar') do
+  fill_in 'Digite o nome, CPF ou email do motorista', with: "teste2@cucumber.com"
+end
+
+Then('aparece o motorista desejado buscado por email') do
+  expect('/motorista/buscar_motorista?query=teste2%40cucumber.com&commit=Buscar ')
+end
