@@ -1,6 +1,8 @@
 class RotaController < ApplicationController
   before_action :set_rotum, only: %i[ show edit update destroy ]
 
+  def home
+  end
   # GET /rota or /rota.json
   def index
     @rota = Rotum.all
@@ -14,6 +16,7 @@ class RotaController < ApplicationController
   def new
     @rotum = Rotum.new
     @onibus = Onibus.all
+    @motorista = Motoristum.all
   end
 
   # GET /rota/1/edit
@@ -24,7 +27,9 @@ class RotaController < ApplicationController
   def create
     @rotum = Rotum.new(rotum_params)
 
+    puts params.inspect
     respond_to do |format|
+
       if @rotum.save
         format.html { redirect_to rotum_url(@rotum), notice: "Rotum was successfully created." }
         format.json { render :show, status: :created, location: @rotum }
@@ -32,6 +37,7 @@ class RotaController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @rotum.errors, status: :unprocessable_entity }
         @onibus = Onibus.all
+        @motorista = Motoristum.all
       end
     end
   end
@@ -75,6 +81,6 @@ class RotaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rotum_params
-      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :origem, :destino, :onibus_id)
+      params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :origem, :destino, :onibus_id, :motoristum_id)
     end
 end

@@ -1,6 +1,8 @@
 class OnibusesController < ApplicationController
   before_action :set_onibus, only: %i[ show edit update destroy ]
 
+  def home
+  end
   # GET /onibuses or /onibuses.json
   def index
     @onibuses = Onibus.all

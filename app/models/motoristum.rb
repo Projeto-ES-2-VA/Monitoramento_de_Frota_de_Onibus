@@ -1,6 +1,8 @@
 class Motoristum < ApplicationRecord
   include PgSearch::Model
 
+  has_many :rotum, dependent: :destroy
+
   validates :nome, presence: true, length: { minimum: 10, maximum: 255 }, format: { with: /\A[a-zA-Z\s]+\z/ }
   validates :cpf, presence: true, uniqueness: true, length: { is: 11 }, numericality: { only_integer: true }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

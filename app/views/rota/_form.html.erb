@@ -57,6 +57,11 @@
   </div>
 
   <div>
+    <%= form.label :motorista_id, style: "displaY: block" %>
+    <%= form.collection_select :motoristum_id, @motorista, :id, :nome, prompt: 'Selecione um Motorista'%>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

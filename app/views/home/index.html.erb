@@ -1,17 +1,7 @@
-
 <h1>Home</h1>
-
-
 <h2>Funcionalidades</h2>
-
 <ul class="menu">
-  <li><%=     link_to "Cadastrar Ônibus", new_onibus_path %> </li>
-  <li><%=     link_to "Listar Ônibus", onibuses_path %> </li>
-  <li><%=     link_to "Cadastrar Rota", new_rotum_path %> </li>
-  <li><%=     link_to "Listar Rotas", rota_path %> </li>
-  <li><%=     link_to "Cadastrar Motorista", new_motoristum_path %> </li>
-  <li><%=     link_to "Listar Motoristas", motorista_path %> </li>
-  <li><%=     link_to "Buscar Rotas", buscar_por_onibus_path %> </li>
-  <li><%=     link_to "Buscar Motoristas", buscar_motorista_motorista_path %> </li>
-  <li><%=     link_to "Buscar Onibus",  buscar_onibus_path %> </li>
+  <li><%= link_to "Motorista", home_motorista_url %></li>
+  <li><%= link_to "Onibus", home_onibuses_url %></li>
+  <li><%= link_to "Rotas", home_rota_url %> </li>
 </ul>
