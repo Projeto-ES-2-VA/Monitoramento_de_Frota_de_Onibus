@@ -67,3 +67,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           bundle exec rails test
+          bundle exec rails test -e actions test/models/onibus_test.rb
+          bundle exec rails test -e actions test/models/rotum_test.rb
+          bundle exec rails test -e actions test/models/motoristum_test.rb
+          
