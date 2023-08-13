@@ -24,3 +24,11 @@ end
 Then('aparece o motorista desejado') do
   expect('/motorista/buscar_motorista?query=Maria+Josefa&commit=Buscar ')
 end
+
+And('digita o cpf do motorista que deseja buscar') do
+  fill_in 'Digite o nome, CPF ou email do motorista', with: "11578944433"
+end
+
+Then('aparece o motorista desejado buscado por cpf') do
+  expect('/motorista/buscar_motorista?query=11578944433&commit=Buscar ')
+end
