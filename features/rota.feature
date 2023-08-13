@@ -4,8 +4,9 @@ Feature: Buscar rotas
   Para que eu saiba por onde cada onibus da frota ja passou
 
   Scenario: Buscar rotas de um onibus
-    Given dado que existe um onibus com placa "ABC-1234"
-    Given que existem duas rotas registrados no sistema para a placa "ABC-1234"
+    Given dado um motorista registrado com nome 'Claudierio Baltazar'
+    And um onibus com placa "ABC-1234"
+    Given que existem duas rotas registrados no sistema para a placa "ABC-1234", e motorista de nome 'Claudierio Baltazar'
     And eu visito a pagina de buscar rotas por onibus
     When eu informo a placa "ABC-1234" do onibus
     Then o sistema exibe a lista de rotas percorridas pelo onibus
@@ -16,8 +17,7 @@ Feature: Buscar rotas
     Then o sistema exibe uma mensagem informando que nenhum resultado foi encontrado
 
   Scenario: Buscar rotas de um onibus que nao possui rotas
-    Given dado que existe um onibus com placa "XYZ-7890"
+    Given um onibus com placa "XYZ-7890"
     Given eu visito a pagina de buscar rotas por onibus
     When eu informo a placa "XYZ-7890" do onibus
     Then o sistema exibe uma mensagem informando que nenhum resultado foi encontrado
-

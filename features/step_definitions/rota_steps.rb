@@ -1,6 +1,19 @@
 require 'rspec/expectations'
 
-Given('dado que existe um onibus com placa {string}') do |placa|
+Given('dado um motorista registrado com nome {string}') do |nome|
+  visit '/motorista/new'
+  fill_in 'Nome', with: nome
+  fill_in 'Cpf', with: '12345098761'
+  fill_in 'Email', with: 'claudinho@gmail.com'
+  fill_in 'Senha', with: '12345@'
+  fill_in 'Telefone', with: '11123456789'
+  fill_in 'Cnh', with: '0123456789'
+  click_button 'Create Motoristum'
+  expect(page).to have_content(nome)
+end
+
+
+When('um onibus com placa {string}') do |placa|
   visit '/onibuses/new'
   fill_in 'Placa', with: placa
   fill_in 'Chassi', with: "11111111111111111"
@@ -11,7 +24,7 @@ Given('dado que existe um onibus com placa {string}') do |placa|
   expect(page).to have_content(placa)
 end
 
-Given('que existem duas rotas registrados no sistema para a placa {string}') do |placa|
+When('que existem duas rotas registrados no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
   visit '/rota/new'
   fill_in 'Nome', with: "nome 1"
   fill_in 'Valor', with: 10
@@ -22,7 +35,7 @@ Given('que existem duas rotas registrados no sistema para a placa {string}') do 
   fill_in 'Origem', with: "origem"
   fill_in 'Destino', with: "destino"
   select(placa, from: 'Onibus')
-
+  select(motorista, from: 'Motoristum')
   click_button 'Create Rotum'
 
   visit '/rota/new'
@@ -35,7 +48,7 @@ Given('que existem duas rotas registrados no sistema para a placa {string}') do 
   fill_in 'Origem', with: "origem 2"
   fill_in 'Destino', with: "destino 2"
   select(placa, from: 'Onibus')
-
+  select(motorista, from: 'Motoristum')
   click_button 'Create Rotum'
 
   visit '/rota'
@@ -61,10 +74,6 @@ Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
   expect(page).to have_content('Resultados')
   expect(page).to have_content('nome 1')
   expect(page).to have_content('nome 2')
-end
-
-Given ("um onibus com a placa {string} nao percorreu nenhuma rota") do |placa|           # features/rota.feature:13
-  fill_in "Field",	with: "sometext"
 end
 
 
