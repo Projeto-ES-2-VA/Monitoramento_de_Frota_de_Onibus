@@ -52,3 +52,6 @@ jobs:
           DISABLE_SPRING: 1
         run: |
           bundle exec rails db:prepare
+          bundle exec cucumber
+          bundle exec rails test -e actions test/models/onibus_test.rb
+          bundle exec rails test -e actions test/models/rotum_test.rb
