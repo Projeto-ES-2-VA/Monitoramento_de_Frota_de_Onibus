@@ -91,6 +91,6 @@ Then('o sistema exibe uma mensagem informando que nenhum resultado foi encontrad
   expect(page).to have_content('Nenhum resultado encontrado.')
 end
 
-And ('eu clico no botao buscar') do
+And('eu clico no botao buscar') do
   click_button 'Buscar'
 end
