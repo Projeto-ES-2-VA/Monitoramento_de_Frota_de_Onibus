@@ -46,32 +46,24 @@ Then('vejo uma mensagem de confirmacao de atualizacao das informacoes do onibus'
   expect(page).to have_content('Onibus was successfully updated.')
 end
 
-When('eu acesso a pagina de edicao de onibus para a placa {string}') do |placa|
-  Onibus.find_by(placa: placa)
+When('eu acesso a pagina de edicao do onibus com a placa {string}') do |placa|
+  visit "/onibuses/#{Onibus.find_by(placa: placa).id}/edit"
 end
 
-When('eu acesso a pagina editar esse onibus') do
-  click_on 'Edit this onibus'
+When('eu acesso a pagina de visualizacao do onibus com a placa {string}') do |placa|
+  visit "/onibuses/#{Onibus.find_by(placa: placa).id}"
 end
 
 Then('vejo uma mensagem informando que nao e possivel cadastrar o onibus') do
   expect(page).to have_content('8 errors prohibited this onibus from being saved:')
 end
 
-And('atualizo as informacoes do onibus placa {string}') do |placa|
+And('atualizo as informacoes do onibus para a placa {string}') do |placa|
   fill_in 'Placa', with: placa
 end
 
 Then('vejo uma mensagem de falha ao tentar atualizar a placa') do
   expect(page).to have_content('Placa is invalid')
-end
-
-Given('eu estou na pagina de listagem de onibus') do
-  visit 'onibuses'
-end
-
-When('eu acesso um onibus em especifico') do
-  click_on 'Show this onibus'
 end
 
 When('eu clico para excluir o onibus') do
@@ -82,9 +74,5 @@ Then('aparece uma mensagem dizendo que o onibus foi excluido com sucesso') do
   expect(page).to have_content('Onibus was successfully destroyed.')
 end
 
-And('eu acesso a pagina de editar onibus') do
-  click_on 'Edit this onibus'
-  expect(page).to have_content('Editing onibus')
-end
 
 
