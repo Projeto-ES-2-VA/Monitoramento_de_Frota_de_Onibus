@@ -3,6 +3,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:latest
@@ -14,8 +15,9 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: password
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Setup Ruby
@@ -24,10 +26,8 @@ jobs:
           ruby-version: 3.1.1
 
       - name: Install PostgreSQL client
-        run: sudo apt-get -yqq install libpq-dev
-
-      # - name: Install Rails
-      #   run: gem install rails -v 7.0.2.2
+        run: |
+          sudo apt-get -yqq install libpq-dev
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
@@ -38,15 +38,10 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Bundle Install
-        run:
+        run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-      # - name: Prepare Database
-      #   run: bundle exec rails db:prepare
-
-      # - name: Run Cucumber
-      #   run: bundle exec cucumber RAILS_ENV=test
       - name: Run Tests
         env:
           PG_DATABASE: postgres
@@ -57,9 +52,7 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           WITH_COVERAGE: true
           DISABLE_SPRING: 1
-
-      - name: Run Unit Tests
-        run: 
+        run: |
           bundle exec rails db:prepare
           bundle exec cucumber
           bundle exec rails test -e test/models/onibus_test.rb
