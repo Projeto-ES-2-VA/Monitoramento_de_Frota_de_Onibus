@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.2.2"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 1.6.3"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -27,7 +27,7 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'pg'
+gem 'pg', '1.5.3'
 
 gem 'pg_search'
 
@@ -78,6 +78,6 @@ group :test do
   gem 'rspec-expectations'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem "ffi"
 end
 
-gem "ffi"
