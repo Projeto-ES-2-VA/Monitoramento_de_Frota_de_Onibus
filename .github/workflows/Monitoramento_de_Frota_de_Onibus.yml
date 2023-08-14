@@ -29,6 +29,13 @@ jobs:
           
       - name: Install Rails
         run: gem install rails
+      - name: List installed gems
+        run: bundle list
+
+      - name: Clear bundle cache and gems
+        run: |
+          bundle clean --force
+          rm -rf vendor/bundle
         
       - name: Cache Ruby Gems
         uses: actions/cache@v2
