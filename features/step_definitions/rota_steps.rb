@@ -13,7 +13,7 @@ Given('dado um motorista registrado com nome {string}') do |nome|
 end
 
 
-When('um onibus com placa {string}') do |placa|
+And('existe um onibus com placa {string}') do |placa|
   visit '/onibuses/new'
   fill_in 'Placa', with: placa
   fill_in 'Chassi', with: "11111111111111111"
@@ -24,7 +24,7 @@ When('um onibus com placa {string}') do |placa|
   expect(page).to have_content(placa)
 end
 
-When('que existem duas rotas registrados no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
+And('que existem duas rotas registrados no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
   visit '/rota/new'
   fill_in 'Nome', with: "nome 1"
   fill_in 'Valor', with: 10
@@ -55,19 +55,13 @@ When('que existem duas rotas registrados no sistema para a placa {string}, e mot
   expect(page).to have_content("nome 2")
 end
 
-# And("eu visito a pagina de buscar rotas por onibus") do
-#   visit buscar_por_onibus_path
-#   expect(page).to have_content("Buscar")
-# end
-
 Given("eu visito a pagina de buscar rotas por onibus") do
   visit buscar_por_onibus_path
   expect(page).to have_content("Buscar")
 end
 
-When('eu informo a placa {string} do onibus') do |placa|
+And('eu seleciono a placa {string} do onibus') do |placa|
   select placa, from: 'placa'
-  click_button 'Buscar'
 end
 
 Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
@@ -76,19 +70,8 @@ Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
   expect(page).to have_content('nome 2')
 end
 
-
-Given('um onibus com a placa {string} nao percorreu nenhuma rota') do |placa|
-  Onibus.create(placa: placa, chassi: '12121212121212126', modelo: 'Modelo A', capacidade: 50, status: 'em operação')
-end
-
-When('eu informo a placa do onibus cadastrado com a placa {string}') do |placa|
-  visit buscar_por_onibus_path
-  select placa, from: 'placa'
-  click_button 'Buscar'
-end
-
-Then('o sistema exibe uma mensagem informando que nenhum resultado foi encontrado') do
-  expect(page).to have_content('Nenhum resultado encontrado.')
+Then('o sistema exibe a mensagem {string}') do |mensagem|
+  expect(page).to have_content(mensagem)
 end
 
 And('eu clico no botao buscar') do
