@@ -43,12 +43,9 @@ Given('existe um motorista registrado com cpf {string}') do |cpf|
 end
 
 #REMOVER MOTORISTA
-Given('eu estou na pagina de listagem de motorista') do
-  visit 'motorista'
-end
 
-When('eu acesso um motorista em especifico') do
-  click_on 'Show this motoristum'
+When('eu acesso a pagina de visualizacao do motorista com o cpf {string}') do |cpf|
+  visit "/motorista/#{Motoristum.find_by(cpf: cpf).id}"
 end
 
 When('eu clico para excluir o motorista') do
@@ -70,30 +67,26 @@ Given('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {st
   fill_in "motoristum[cnh]", with: cnh
   end
 
-When('eu clico para editar motorista') do
-  click_on 'Edit this motoristum'
+When('eu acesso a pagina de edicao do motorista com o cpf {string}') do |cpf|
+  visit "/motorista/#{Motoristum.find_by(cpf: cpf).id}/edit"
 end
 
-When('eu altero o campo email para {string}') do |email|
+And('eu atualizo o email do motorista para {string}') do |email|
   fill_in 'Email', with: email
+end
+
+And('atualizo o telefone do motorista para {string}') do |telefone|
+  fill_in 'Telefone', with: telefone
 end
 
 When('clico para atualizar o motorista') do
   click_button 'Update Motoristum'
 end
 
-Then('aparece uma mensagem dizendo que a motorista foi atualizado com sucesso') do
-  expect(page).to have_content('Motoristum was successfully updated.')
+Then('vejo uma mensagem de falha ao tentar atualizar o telefone') do
+  expect(page).to have_content('1 error prohibited this motoristum from being saved')
 end
 
-
-#EXIBIR MOTORISTA
-Then('eu vejo os detalhes do motorista com o cpf: {string} e vejo os campos do mesmo') do |cpf|
-
-  motorista = Motoristum.find_by(cpf: cpf)
-  expect(page).to have_content("Nome: #{motorista.nome}")
-  expect(page).to have_content("Cpf: #{motorista.cpf}")
-  expect(page).to have_content("Email: #{motorista.email}")
-  expect(page).to have_content("Telefone: #{motorista.telefone}")
-  expect(page).to have_content("Cnh: #{motorista.cnh}")
+Then('aparece uma mensagem dizendo que a motorista foi atualizado com sucesso') do
+  expect(page).to have_content('Motoristum was successfully updated.')
 end

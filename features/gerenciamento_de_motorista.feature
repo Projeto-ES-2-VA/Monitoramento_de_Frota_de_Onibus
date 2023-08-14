@@ -16,27 +16,25 @@ Feature: Gerenciamento de Motorista
     And clico no botao para cadastrar o motorista
     Then vejo uma mensagem informando que nao e possivel cadastrar o motorista
 
-  Scenario: editar motorista
+  Scenario: Atualizar email do motorista
     Given eu que sou um usuario do sistema
     And existe um motorista registrado com cpf '12345678911'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    And eu clico para editar motorista
-    And eu altero o campo email para "josealmeida@gmail.com"
+    When eu acesso a pagina de edicao do motorista com o cpf '12345678911'
+    And eu atualizo o email do motorista para "josealmeida@gmail.com"
     And clico para atualizar o motorista
     Then aparece uma mensagem dizendo que a motorista foi atualizado com sucesso
 
   Scenario: Remocao de um motorista do sistema
     Given eu que sou um usuario do sistema
     And existe um motorista registrado com cpf '12345678910'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
+    When eu acesso a pagina de visualizacao do motorista com o cpf '12345678910'
     And eu clico para excluir o motorista
     Then aparece uma mensagem dizendo que o motorista foi excluido com sucesso
 
-  Scenario: Exibir detalhes de um motorista
+  Scenario: Atualizar motorista com telefone invalido
     Given eu que sou um usuario do sistema
     And existe um motorista registrado com cpf '12345678920'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    Then eu vejo os detalhes do motorista com o cpf: '12345678920' e vejo os campos do mesmo
+    When eu acesso a pagina de edicao do motorista com o cpf '12345678920'
+    And atualizo o telefone do motorista para '58795'
+    And clico para atualizar o motorista
+    Then vejo uma mensagem de falha ao tentar atualizar o telefone
