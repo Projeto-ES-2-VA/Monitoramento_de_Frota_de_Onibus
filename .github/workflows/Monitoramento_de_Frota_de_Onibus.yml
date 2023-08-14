@@ -27,7 +27,7 @@ jobs:
         run: sudo apt-get -yqq install libpq-dev
 
       - name: Install Rails
-        run: gem install rails -v 7.0.2.2
+        run: gem install rails -v 7.0.2.2 --path vendor/bundle
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
