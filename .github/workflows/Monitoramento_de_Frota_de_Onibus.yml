@@ -26,7 +26,10 @@ jobs:
       - name: Install PostgreSQL client
         run:
           sudo apt-get -yqq install libpq-dev
-
+          
+      - name: Install Rails
+        run: gem install rails
+        
       - name: Cache Ruby Gems
         uses: actions/cache@v2
         with:
