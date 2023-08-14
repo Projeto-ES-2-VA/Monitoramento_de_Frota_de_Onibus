@@ -64,10 +64,15 @@ jobs:
         run: |
           bundle exec cucumber RAILS_ENV=test
 
-      - name: Run Unit Tests
+      - name: Run Cucumber and Unit Tests
         run: |
-          bundle exec rails test
-          bundle exec rails test -e actions test/models/onibus_test.rb
-          bundle exec rails test -e actions test/models/rotum_test.rb
-          bundle exec rails test -e actions test/models/motoristum_test.rb
-          
+          if [ "$RAILS_ENV" = "development" ]; then
+            bundle exec cucumber RAILS_ENV=test
+            bundle exec rails test
+          else
+            bundle exec rails test
+            bundle exec rails test -e actions test/models/onibus_test.rb
+            bundle exec rails test -e actions test/models/rotum_test.rb
+            bundle exec rails test -e actions test/models/motoristum_test.rb
+  
+
