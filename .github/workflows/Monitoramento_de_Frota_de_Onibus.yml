@@ -7,14 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      PG_DATABASE: postgres
-      PG_HOST: localhost
-      PG_USER: postgres
-      PG_PASSWORD: password
-      RAILS_ENV: production
+      DATABASE_URL: "sqlite3::memory:"
+      RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       WITH_COVERAGE: true
       DISABLE_SPRING: 1
+
 
     # services:
       # postgres:
