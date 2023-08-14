@@ -26,17 +26,15 @@ jobs:
       - name: Install PostgreSQL client
         run:
           sudo apt-get -yqq install libpq-dev
-          
+
       - name: Install Rails
         run: gem install rails
-      - name: List installed gems
-        run: bundle list
 
       - name: Clear bundle cache and gems
         run: |
           bundle clean --force
           rm -rf vendor/bundle
-        
+
       - name: Cache Ruby Gems
         uses: actions/cache@v2
         with:
@@ -49,6 +47,9 @@ jobs:
         run:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+
+      - name: List installed gems
+        run: bundle list
 
       - name: Run Tests
         env:
@@ -64,4 +65,3 @@ jobs:
             bundle exec rails test -e test/models/onibus_test.rb
             bundle exec rails test -e test/models/rotum_test.rb
             bundle exec rails test -e test/models/motoristum_test.rb
-
