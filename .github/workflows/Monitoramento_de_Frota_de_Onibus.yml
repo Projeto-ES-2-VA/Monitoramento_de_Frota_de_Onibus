@@ -27,7 +27,7 @@ jobs:
         run: sudo apt-get -yqq install libpq-dev
 
       - name: Install Rails
-        run: gem install rails
+        run: gem install rails -v 7.0.2.2
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
@@ -50,3 +50,6 @@ jobs:
 
       - name: Run Unit Tests
         run: bundle exec rails test
+          bundle exec rails test -e test/models/onibus_test.rb
+          bundle exec rails test -e test/models/rotum_test.rb
+          bundle exec rails test -e test/models/motoristum_test.rb
