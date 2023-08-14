@@ -56,14 +56,12 @@ jobs:
            PG_HOST: localhost
            PG_USER: postgres
            PG_PASSWORD: password
-           RAILS_ENV: actions
            RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
            WITH_COVERAGE: true
            DISABLE_SPRING: 1
         run: |
             bundle exec rails db:prepare
-            bundle exec rails test -e actions test/models/onibus_test.rb
-            bundle exec rails test -e actions test/models/rotum_test.rb
-            bundle exec rails test -e actions test/models/motoristum_test.rb
-  
+            bundle exec rails test -e test/models/onibus_test.rb
+            bundle exec rails test -e test/models/rotum_test.rb
+            bundle exec rails test -e test/models/motoristum_test.rb
 
