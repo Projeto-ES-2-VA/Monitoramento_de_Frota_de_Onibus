@@ -1,0 +1,8 @@
+{
+  "name": "Monitoramento_de_Frota_de_Onibus_2",
+  "version": "1.0.0",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "controllers": "^0.0.2"
+  }
+}

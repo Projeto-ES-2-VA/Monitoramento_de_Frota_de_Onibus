@@ -42,6 +42,10 @@ And("digita o chassi do onibus que deseja buscar") do
   fill_in 'Busca', with: "9BWGD21JX22512345"
 end
 
+And("digita um chassi no qual nao existe no banco de dados") do
+  fill_in 'Busca', with: "7347b3dnkke"
+end
+
 When("seleciona a caracteristica chassi para buscar") do
   expect(page).to have_content('Chassi:')
   choose('param_Chassi')
