@@ -1,44 +1,106 @@
 # Criar rota com sucesso
-Given('o onibus de placa: {string}, chassi: {string}, modelo: {string}, capacidade: {int}, status: {string} existe') do |placa, chassi, modelo, capacidade, status|
-
+Given('que eu estou na pagina de cadastro de onibus') do
   visit '/onibuses/new'
-  fill_in 'Placa', with: placa
-  fill_in 'Chassi', with: chassi
-  fill_in 'Modelo', with: modelo
-  fill_in 'Capacidade', with: capacidade
-  select(status, from: 'Status')
-  click_button 'Create Onibus'
-
 end
 
-And('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {string}, telefone: {string} , e cnh: {string} existe') do |nome, cpf, email, senha, telefone, cnh|
+And('preencho a placa: {string}') do |placa|
+  fill_in 'Placa', with: placa
+end
 
+And('preencho o chassi: {string}') do |chassi|
+  fill_in 'Chassi', with: chassi
+end
+
+And('preencho o modelo: {string}') do |modelo|
+  fill_in 'Modelo', with: modelo
+end
+
+And('preencho a capacidade: {int}') do |capacidade|
+  fill_in 'Capacidade', with: capacidade
+end
+
+And('preencho o status: {string}') do |status|
+  select(status, from: 'Status')
+end
+
+And('clico em criar onibus') do
+  click_button 'Create Onibus'
+end
+
+Given('que eu estou na pagina de cadastro de motorista') do
   visit '/motorista/new'
-  fill_in "motoristum[nome]", with: nome
-  fill_in "motoristum[cpf]", with: cpf
-  fill_in "motoristum[email]", with: email
-  fill_in "motoristum[senha]", with: senha
-  fill_in "motoristum[telefone]", with: telefone
-  fill_in "motoristum[cnh]", with: cnh
-  click_button "Create Motoristum"
+end
 
+And('preencho o nome: {string}') do |nome|
+  fill_in "motoristum[nome]", with: nome
+end
+
+And('preencho o cpf: {string}') do |cpf|
+  fill_in "motoristum[cpf]", with: cpf
+end
+
+And('preencho o email: {string}') do |email|
+  fill_in "motoristum[email]", with: email
+end
+
+And('preencho a senha: {string}') do |senha|
+  fill_in "motoristum[senha]", with: senha
+end
+
+And('preencho o telefone: {string}') do |telefone|
+  fill_in "motoristum[telefone]", with: telefone
+end
+
+And('preencho o cnh: {string}') do |cnh|
+  fill_in "motoristum[cnh]", with: cnh
+end
+
+And('clico em criar motorista') do
+  click_button "Create Motoristum"
   expect(page).to have_content("Motoristum was successfully created.")
 end
 
-And('que eu estou na pagina de cadastro de rota') do
+When('que eu estou na pagina de cadastro de rota') do
   visit '/rota/new'
 end
 
-When("eu preencho os campos obrigatorios com os seguintes dados, nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string} e o motorista: {string}") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus, motorista|
+And('preencho o nome da rota: {string}') do |nome|
   fill_in 'Nome', with: nome
+end
+
+And('preencho o valor: {float}') do |valor|
   fill_in 'Valor', with: valor
+end
+
+And('preencho a distancia: {float}') do |distancia|
   fill_in 'Distancia', with: distancia
+end
+
+And('preencho a duracao: {float}') do |duracao|
   fill_in 'Duracao', with: duracao
+end
+
+And('preencho o inicio: {string}') do |inicio|
   fill_in 'Inicio', with: inicio
+end
+
+And('preencho o fim: {string}') do |fim|
   fill_in 'Fim', with: fim
+end
+
+And('preencho a origem: {string}') do |origem|
   fill_in 'Origem', with: origem
+end
+
+And('preencho o destino: {string}') do |destino|
   fill_in 'Destino', with: destino
+end
+
+And('preencho o onibus: {string}') do |onibus|
   select(onibus, from: 'Onibus')
+end
+
+And('preencho o motorista: {string}') do |motorista|
   select(motorista, from: 'Motoristum')
 end
 
@@ -60,22 +122,7 @@ Then('eu vejo a mensagem {string}') do |mensagem|
 end
 
 # Editar rota
-Given("a rota de nome: {string}, valor: {float}, distancia: {float}, duracao: {float}, inicio: {string}, fim: {string}, origem: {string}, destino: {string}, onibus: {string} e o motorista: {string} existe") do |nome, valor, distancia, duracao, inicio, fim, origem, destino, onibus, motorista|
-  visit '/rota/new'
-  fill_in 'Nome', with: nome
-  fill_in 'Valor', with: valor
-  fill_in 'Distancia', with: distancia
-  fill_in 'Duracao', with: duracao
-  fill_in 'Inicio', with: inicio
-  fill_in 'Fim', with: fim
-  fill_in 'Origem', with: origem
-  fill_in 'Destino', with: destino
-  select(onibus, from: 'Onibus')
-  select(motorista, from: 'Motoristum')
-  click_button 'Create Rotum'
-end
-
-And("eu estou na pagina de listagem de rotas") do
+When("eu estou na pagina de listagem de rotas") do
   visit '/rota'
   expect(page).to have_content('Rota do Agreste')
 end
@@ -103,7 +150,6 @@ end
 
 
 #Excluir rota
-
 And("eu clico para excluir rota") do
   click_on 'Destroy this rotum'
 end
