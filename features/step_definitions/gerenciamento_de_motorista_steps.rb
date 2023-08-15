@@ -16,7 +16,6 @@ When('clico no botao para cadastrar o motorista') do
   click_button "Create Motoristum"
 end
 
-#REGISTRAR COM DADOS INVALIDOS
 Given('existe um motorista registrado com cpf {string}') do |cpf|
   visit '/motorista/new'
   fill_in 'Nome', with: 'Henrique Almeida'
@@ -28,7 +27,6 @@ Given('existe um motorista registrado com cpf {string}') do |cpf|
   click_button 'Create Motoristum'
 end
 
-#REMOVER MOTORISTA
 Given('eu estou na pagina de listagem de motorista') do
   visit 'motorista'
 end
@@ -40,16 +38,6 @@ end
 When('eu clico para excluir o motorista') do
   click_button 'Destroy this motoristum'
 end
-
-#EDITAR MOTORISTA
-Given('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {string}, telefone: {string} , e cnh: {string}') do |nome, cpf, email, senha, telefone, cnh|
-  fill_in "motoristum[nome]", with: nome
-  fill_in "motoristum[cpf]", with: cpf
-  fill_in "motoristum[email]", with: email
-  fill_in "motoristum[senha]", with: senha
-  fill_in "motoristum[telefone]", with: telefone
-  fill_in "motoristum[cnh]", with: cnh
-  end
 
 When('eu clico para editar motorista') do
   click_on 'Edit this motoristum'
@@ -64,10 +52,10 @@ Then('aparece a mensagem {string}') do |mensagem|
 end
 
 Then('eu vejo os detalhes do motorista com o cpf: {string} e vejo os campos do mesmo') do |cpf|
-  motorista = Motoristum.find_by(cpf: cpf)
-  expect(page).to have_content("Nome: #{motorista.nome}")
-  expect(page).to have_content("Cpf: #{motorista.cpf}")
-  expect(page).to have_content("Email: #{motorista.email}")
-  expect(page).to have_content("Telefone: #{motorista.telefone}")
-  expect(page).to have_content("Cnh: #{motorista.cnh}")
+  puts Motoristum.find_by(cpf: cpf).nome
+  expect(page).to have_content("Nome: Henrique Almeida")
+  expect(page).to have_content("Cpf: #{cpf}")
+  expect(page).to have_content("Email: almeida@gmail.com")
+  expect(page).to have_content("Telefone: 11123456789")
+  expect(page).to have_content("Cnh: 0123456789")
 end
