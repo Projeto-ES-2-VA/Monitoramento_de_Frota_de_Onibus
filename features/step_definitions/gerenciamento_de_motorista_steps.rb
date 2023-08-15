@@ -8,13 +8,8 @@ When('eu acesso a pagina de registro do motorista') do
   expect(page).to have_content("New motoristum")
 end
 
-When('preencho do motorista o nome: {string}, cpf: {string}, email: {string}, senha: {string}, telefone: {string} , e cnh: {string}') do |nome, cpf, email, senha, telefone, cnh|
-  fill_in "motoristum[nome]", with: nome
-  fill_in "motoristum[cpf]", with: cpf
-  fill_in "motoristum[email]", with: email
-  fill_in "motoristum[senha]", with: senha
-  fill_in "motoristum[telefone]", with: telefone
-  fill_in "motoristum[cnh]", with: cnh
+And('preencho {string} com {string}') do |campo, valor|
+  fill_in "motoristum[#{campo}]", with: valor
 end
 
 When('clico no botao para cadastrar o motorista') do
@@ -58,10 +53,6 @@ Given('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {st
 
 When('eu clico para editar motorista') do
   click_on 'Edit this motoristum'
-end
-
-When('eu altero o campo email para {string}') do |email|
-  fill_in 'Email', with: email
 end
 
 When('clico para atualizar o motorista') do

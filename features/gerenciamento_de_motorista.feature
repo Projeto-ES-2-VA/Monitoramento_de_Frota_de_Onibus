@@ -6,7 +6,12 @@ Feature: Gerenciamento de Motorista
   Scenario: Registro de motorista com informacoes validas
     Given eu que sou um usuario do sistema
     When eu acesso a pagina de registro do motorista
-    And preencho do motorista o nome: "Jose Almeida", cpf: "12345678910", email: "jose@gmail.com", senha: "123456!", telefone: "11123456789" , e cnh: "1234567891"
+    And preencho "nome" com "Jose Almeida"
+    And preencho "cpf" com "12345678910"
+    And preencho "email" com "jose@gmail.com"
+    And preencho "senha" com "123456!"
+    And preencho "telefone" com "11123456789"
+    And preencho "cnh" com "1234567891"
     And clico no botao para cadastrar o motorista
     Then aparece a mensagem "Motoristum was successfully created."
 
@@ -22,7 +27,7 @@ Feature: Gerenciamento de Motorista
     And eu estou na pagina de listagem de motorista
     When eu acesso um motorista em especifico
     And eu clico para editar motorista
-    And eu altero o campo email para "josealmeida@gmail.com"
+    And preencho "email" com "josealmeida@gmail.com"
     And clico para atualizar o motorista
     Then aparece a mensagem "Motoristum was successfully updated."
 
@@ -32,7 +37,7 @@ Feature: Gerenciamento de Motorista
     And eu estou na pagina de listagem de motorista
     When eu acesso um motorista em especifico
     And eu clico para editar motorista
-    And eu altero o campo email para "josealmeidagmail.com"
+    And preencho "email" com "josealmeidagmail.com"
     And clico para atualizar o motorista
     Then aparece a mensagem "Email is invalid"
 
