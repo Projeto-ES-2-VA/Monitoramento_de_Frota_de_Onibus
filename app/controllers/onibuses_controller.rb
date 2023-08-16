@@ -65,25 +65,33 @@ class OnibusesController < ApplicationController
     data = params[:data]
     @param = params[:param]
     case @param
-      when "Placa"
-        @results = Onibus.where("onibuses.placa LIKE ?", "%#{data}%")
-      when "Chassi"
-        @results = Onibus.where("onibuses.chassi LIKE ?", "%#{data}%")
-      when "Modelo"
-        @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
+      when "Placa" then search_by_placa(data)
+      when "Chassi" then search_by_chassi(data)
+      when "Modelo" then search_by_modelo(data)
     end
     render 'busca'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def search_by_placa(data)
+      @results = Onibus.where("onibuses.placa LIKE ?", "%#{data}%")
+    end
+
+    def search_by_chassi(data)
+      @results = Onibus.where("onibuses.chassi LIKE ?", "%#{data}%")
+    end
+
+    def search_by_modelo(data)
+      @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
+    end
 
     def set_onibus
       @onibus = Onibus.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def onibus_params
       params.require(:onibus).permit(:placa, :chassi, :modelo, :capacidade, :status)
     end
+
 end
