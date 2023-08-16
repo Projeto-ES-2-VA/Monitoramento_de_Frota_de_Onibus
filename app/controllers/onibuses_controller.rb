@@ -74,17 +74,17 @@ class OnibusesController < ApplicationController
 
   private
 
-  def search_by_placa(data)
-    @results = Onibus.where("onibuses.placa LIKE ?", "%#{data}%")
-  end
+    def search_by_placa(data)
+      @results = Onibus.where("onibuses.placa LIKE ?", "%#{data}%")
+    end
 
-  def search_by_chassi(data)
-    @results = Onibus.where("onibuses.chassi LIKE ?", "%#{data}%")
-  end
+    def search_by_chassi(data)
+      @results = Onibus.where("onibuses.chassi LIKE ?", "%#{data}%")
+    end
 
-  def search_by_modelo(data)
-    @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
-  end
+    def search_by_modelo(data)
+      @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
