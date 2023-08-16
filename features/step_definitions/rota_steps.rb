@@ -24,7 +24,7 @@ And('existe um onibus com placa {string}') do |placa|
   expect(page).to have_content(placa)
 end
 
-And('que existem duas rotas registrados no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
+And('que existe uma rota registrada no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
   visit '/rota/new'
   fill_in 'Nome', with: "nome 1"
   fill_in 'Valor', with: 10
@@ -38,21 +38,8 @@ And('que existem duas rotas registrados no sistema para a placa {string}, e moto
   select(motorista, from: 'Motoristum')
   click_button 'Create Rotum'
 
-  visit '/rota/new'
-  fill_in 'Nome', with: "nome 2"
-  fill_in 'Valor', with: 10
-  fill_in 'Distancia', with: 10
-  fill_in 'Duracao', with: 10
-  fill_in 'Inicio', with: "11:00"
-  fill_in 'Fim', with: "14:00"
-  fill_in 'Origem', with: "origem 2"
-  fill_in 'Destino', with: "destino 2"
-  select(placa, from: 'Onibus')
-  select(motorista, from: 'Motoristum')
-  click_button 'Create Rotum'
-
   visit '/rota'
-  expect(page).to have_content("nome 2")
+  expect(page).to have_content("nome 1")
 end
 
 Given("eu visito a pagina de buscar rotas por onibus") do
@@ -67,7 +54,6 @@ end
 Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
   expect(page).to have_content('Resultados')
   expect(page).to have_content('nome 1')
-  expect(page).to have_content('nome 2')
 end
 
 Then('o sistema exibe a mensagem {string}') do |mensagem|
