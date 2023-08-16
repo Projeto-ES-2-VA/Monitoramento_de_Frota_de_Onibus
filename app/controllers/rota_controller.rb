@@ -15,8 +15,7 @@ class RotaController < ApplicationController
   # GET /rota/new
   def new
     @rotum = Rotum.new
-    @onibus = Onibus.all
-    @motorista = Motoristum.all
+    list_onibus_and_motorista
   end
 
   # GET /rota/1/edit
@@ -26,18 +25,14 @@ class RotaController < ApplicationController
   # POST /rota or /rota.json
   def create
     @rotum = Rotum.new(rotum_params)
-
-    puts params.inspect
     respond_to do |format|
-
       if @rotum.save
         format.html { redirect_to rotum_url(@rotum), notice: "Rotum was successfully created." }
         format.json { render :show, status: :created, location: @rotum }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @rotum.errors, status: :unprocessable_entity }
-        @onibus = Onibus.all
-        @motorista = Motoristum.all
+        list_onibus_and_motorista
       end
     end
   end
@@ -68,16 +63,19 @@ class RotaController < ApplicationController
   def buscar_por_onibus
     @placas_onibus = Onibus.pluck(:placa)
     @rotas = Rotum.joins(:onibus).where("onibuses.placa = ?", params[:placa])
-    puts @rotas.inspect # Adicione este log para verificar as rotas encontradas
     render 'busca_por_onibus'
+  end
+
+  def list_onibus_and_motorista
+    @onibus = Onibus.all
+    @motorista = Motoristum.all
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rotum
-      @rotum = Rotum.find(params[:id])
-      @onibus = Onibus.all
-      @motorista = Motoristum.all
+      @rotum = Rotum.find_by(id: params[:id])
+      list_onibus_and_motorista
     end
 
     # Only allow a list of trusted parameters through.
