@@ -26,8 +26,8 @@ class RotaController < ApplicationController
         format.html { redirect_to rotum_url(@rotum), notice: "Rotum was successfully created." }
         format.json { render :show, status: :created, location: @rotum }
       else
-        format.html { render_error_and_list_onibus_and_motorista }
-        format.json { render json: @rotum.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+        list_onibus_and_motorista
       end
     end
   end
@@ -40,6 +40,7 @@ class RotaController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @rotum.errors, status: :unprocessable_entity }
+        list_onibus_and_motorista
       end
     end
   end
@@ -68,11 +69,6 @@ class RotaController < ApplicationController
       @rotum = Rotum.find_by(id: params[:id])
       list_onibus_and_motorista
     end
-
-  def render_error_and_list_onibus_and_motorista
-    render :new, status: :unprocessable_entity
-    list_onibus_and_motorista
-  end
 
     def rotum_params
       params.require(:rotum).permit(:nome, :valor, :distancia, :duracao, :inicio, :fim, :origem, :destino, :onibus_id, :motoristum_id)
