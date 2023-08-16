@@ -86,15 +86,12 @@ class OnibusesController < ApplicationController
       @results = Onibus.where("onibuses.modelo LIKE ?", "%#{data}%")
     end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-
     def set_onibus
       @onibus = Onibus.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def onibus_params
       params.require(:onibus).permit(:placa, :chassi, :modelo, :capacidade, :status)
     end
+
 end
