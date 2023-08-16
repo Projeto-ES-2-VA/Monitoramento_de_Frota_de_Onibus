@@ -1,15 +1,36 @@
-Given('o motorista de nome: {string}, cpf: {string}, email: {string}, senha: {string}, telefone: {string}, e cnh: {string} foi criado') do |nome, cpf, email, senha, telefone, cnh|
+Given('que eu estou na pagina de cadastro de motorista ') do
   visit '/motorista/new'
+end
+
+And('preencho o nome do motorista: {string}') do |nome|
   fill_in "motoristum[nome]", with: nome
+end
+
+And('preencho o cpf do motorista: {string}') do |cpf|
   fill_in "motoristum[cpf]", with: cpf
+end
+
+And('preencho o email do motorista: {string}') do |email|
   fill_in "motoristum[email]", with: email
+end
+
+And('preencho a senha do motorista: {string}') do |senha|
   fill_in "motoristum[senha]", with: senha
+end
+
+And('preencho o telefone do motorista: {string}') do |telefone|
   fill_in "motoristum[telefone]", with: telefone
+end
+
+And('preencho o cnh do motorista: {string}') do |cnh|
   fill_in "motoristum[cnh]", with: cnh
+end
+
+And('clico em criar um motorista') do
   click_button 'Create Motoristum'
 end
 
-And('o usuario esta na pagina de busca de motorista') do
+When('o usuario esta na pagina de busca de motorista') do
   visit '/motorista/buscar_motorista'
 end
 
