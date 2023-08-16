@@ -21,8 +21,6 @@ class Rotum < ApplicationRecord
     end
   end
 
-  private
-
   def horario_conflitante
     if Rotum.exists?(['onibus_id = ? AND ((inicio BETWEEN ? AND ?) OR (fim BETWEEN ? AND ?))', onibus_id, inicio, fim, inicio, fim])
       errors.add(:base, 'Conflito de horários com outra rota do mesmo ônibus')

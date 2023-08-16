@@ -52,7 +52,6 @@ Then('aparece a mensagem {string}') do |mensagem|
 end
 
 Then('eu vejo os detalhes do motorista com o cpf: {string} e vejo os campos do mesmo') do |cpf|
-  puts Motoristum.find_by(cpf: cpf).nome
   expect(page).to have_content("Nome: Henrique Almeida")
   expect(page).to have_content("Cpf: #{cpf}")
   expect(page).to have_content("Email: almeida@gmail.com")
