@@ -21,26 +21,31 @@ class RotaController < ApplicationController
 
   def create
     @rotum = Rotum.new(rotum_params)
-    respond_to do |format|
-      if @rotum.save
-        format.html { redirect_to rotum_url(@rotum), notice: "Rotum was successfully created." }
-        format.json { render :show, status: :created, location: @rotum }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        list_onibus_and_motorista
-      end
+    if @rotum.save
+      show_message_and_handle_response("Rotum was successfully created.", rotum_url(@rotum))
+    else
+      show_message_and_handle_response(nil, nil, @rotum.errors, :new)
+      list_onibus_and_motorista
     end
   end
 
   def update
+    if @rotum.update(rotum_params)
+      show_message_and_handle_response("Rotum was successfully updated.", rotum_url(@rotum))
+    else
+      show_message_and_handle_response(nil, nil, @rotum.errors, :edit)
+    end
+  end
+
+  def show_message_and_handle_response(message, redirect_path, errors = nil, render_path = nil)
     respond_to do |format|
-      if @rotum.update(rotum_params)
-        format.html { redirect_to rotum_url(@rotum), notice: "Rotum was successfully updated." }
-        format.json { render :show, status: :ok, location: @rotum }
+      if errors.nil?
+        format.html { redirect_to redirect_path, notice: message }
+        format.json { render json: { message: message }, status: :ok }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @rotum.errors, status: :unprocessable_entity }
         list_onibus_and_motorista
+        format.html { render render_path, status: :unprocessable_entity }
+        format.json { render json: { errors: errors }, status: :unprocessable_entity }
       end
     end
   end
