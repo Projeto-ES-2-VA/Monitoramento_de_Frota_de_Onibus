@@ -15,16 +15,9 @@ Rails.application.configure do
   config.server_timing = true
 
   if Rails.root.join("tmp/caching-dev.txt").exist?
-    config.action_controller.perform_caching = true
-    config.action_controller.enable_fragment_cache_logging = true
-
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
-    }
+    configure_caching(config)
   else
-    config.action_controller.perform_caching = false
-    config.cache_store = :null_store
+    configure_no_caching(config)
   end
 
   # Active Storage settings
@@ -35,11 +28,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Logging and deprecation settings
-  config.active_support.deprecation = :log
-  config.active_support.disallowed_deprecation = :raise
-  config.active_support.disallowed_deprecation_warnings = []
-  config.active_record.migration_error = :page_load
-  config.active_record.verbose_query_logs = true
+  configure_logging_deprecation(config)
 
   # Asset settings
   config.assets.quiet = true
@@ -52,4 +41,26 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+end
+
+def configure_caching(config)
+  config.action_controller.perform_caching = true
+  config.action_controller.enable_fragment_cache_logging = true
+  config.cache_store = :memory_store
+  config.public_file_server.headers = {
+    "Cache-Control" => "public, max-age=#{2.days.to_i}"
+  }
+end
+
+def configure_no_caching(config)
+  config.action_controller.perform_caching = false
+  config.cache_store = :null_store
+end
+
+def configure_logging_deprecation(config)
+  config.active_support.deprecation = :log
+  config.active_support.disallowed_deprecation = :raise
+  config.active_support.disallowed_deprecation_warnings = []
+  config.active_record.migration_error = :page_load
+  config.active_record.verbose_query_logs = true
 end
