@@ -1,4 +1,4 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/87eda09158014c4d9c69249797f1f51b)](https://app.codacy.com/gh/Projeto-ES-2-VA/Monitoramento_de_Frota_de_Onibus/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)]
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cf9bfa6ec03946e5a5d1077fb6e9feb5)](https://app.codacy.com/gh/Projeto-ES-2-VA/Monitoramento_de_Frota_de_Onibus/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 <div align="center">
 <h1>Sistema de Monitoramento de Frota de ônibus</h1>
 <img src="https://raw.githubusercontent.com/Projeto-ES-2-VA/Monitoramento_de_Frota_de_Onibus/main/documentos/logo.png"/>
