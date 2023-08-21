@@ -5,158 +5,159 @@ Feature: Gerenciamento de rotas
 
   Scenario: registrar rota com informacoes validas
     Given que eu estou na pagina de cadastro de onibus
-    And preencho a placa: "ABC-1234"
-    And preencho o chassi: "9BWGD21JX22512345"
-    And preencho o modelo: "Marcopolo Paradiso 1800 DD"
-    And preencho a capacidade: 50
-    And preencho o status: "em operação"
-    And clico em criar onibus
+    And preencho "placa" de "onibus" com "ABC-1234"
+    And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
+    And preencho "modelo" de "onibus" com "Marcopolo Paradiso 1800 DD"
+    And preencho "capacidade" de "onibus" com  50
+    And seleciono "em operação" como "status" de "onibus"
+    And eu clico em "Create Onibus"
     Given que eu estou na pagina de cadastro de motorista
-    And preencho o nome: "Jose Almeida"
-    And preencho o cpf: "12345678910"
-    And preencho o email: "jose@gmail.com"
-    And preencho a senha: "123456!"
-    And preencho o telefone: "11123456789"
-    And preencho o cnh: "1234567891"
-    And clico em criar motorista
+    And preencho "nome" de "motoristum" com "Jose Almeida"
+    And preencho "cpf" de "motoristum" com "12345678910"
+    And preencho "email" de "motoristum" com "jose@gmail.com"
+    And preencho "senha" de "motoristum" com "123456!"
+    And preencho "telefone" de "motoristum" com "11123456789"
+    And preencho "cnh" de "motoristum" com "1234567891"
+    And eu clico em "Create Motoristum"
     When que eu estou na pagina de cadastro de rota
-    And preencho o nome da rota: "Rota do Agreste"
-    And preencho o valor: 50.00
-    And preencho a distancia: 120.5
-    And preencho a duracao: 2.5
-    And preencho o inicio: "08:30"
-    And preencho o fim: "10:00"
-    And preencho a origem: "Garanhuns"
-    And preencho o destino: "Caruaru"
-    And preencho o onibus: "ABC-1234"
-    And preencho o motorista: "Jose Almeida"
-    And clico em criar uma rota
-    Then eu devo ser redirecionado para a pagina de rota que foi criada e vejo a mensagem "Rotum was successfully created."
+    And preencho "nome" de "rotum" com "Rota do Agreste"
+    And preencho "valor" de "rotum" com 50.00
+    And preencho "distancia" de "rotum" com 120.5
+    And preencho "duracao" de "rotum" com 2.5
+    And preencho "inicio" de "rotum" com "08:30"
+    And preencho "fim" de "rotum" com "10:00"
+    And preencho "origem" de "rotum" com "Garanhuns"
+    And preencho "destino" de "rotum" com "Caruaru"
+    And seleciono "ABC-1234" como "onibus_id" de "rotum" 
+    And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
+    And eu clico em "Create Rotum"
+    Then eu devo ser redirecionado para a pagina da rota que foi criada
+    And eu vejo a mensagem "Rotum was successfully created."
+
 
   Scenario: registrar rota com o campo nome em branco
     Given que eu estou na pagina de cadastro de onibus
-    And preencho a placa: "ABC-1234"
-    And preencho o chassi: "9BWGD21JX22512345"
-    And preencho o modelo: "Marcopolo Paradiso 1800 DD"
-    And preencho a capacidade: 50
-    And preencho o status: "em operação"
-    And clico em criar onibus
+    And preencho "placa" de "onibus" com "ABC-1234"
+    And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
+    And preencho "modelo" de "onibus" com "Marcopolo Paradiso 1800 DD"
+    And preencho "capacidade" de "onibus" com  50
+    And seleciono "em operação" como "status" de "onibus"
+    And eu clico em "Create Onibus"
     Given que eu estou na pagina de cadastro de motorista
-    And preencho o nome: "Jose Almeida"
-    And preencho o cpf: "12345678910"
-    And preencho o email: "jose@gmail.com"
-    And preencho a senha: "123456!"
-    And preencho o telefone: "11123456789"
-    And preencho o cnh: "1234567891"
-    And clico em criar motorista
+    And preencho "nome" de "motoristum" com "Jose Almeida"
+    And preencho "cpf" de "motoristum" com "12345678910"
+    And preencho "email" de "motoristum" com "jose@gmail.com"
+    And preencho "senha" de "motoristum" com "123456!"
+    And preencho "telefone" de "motoristum" com "11123456789"
+    And preencho "cnh" de "motoristum" com "1234567891"
+    And eu clico em "Create Motoristum"
     When que eu estou na pagina de cadastro de rota
-    And preencho o nome da rota: ""
-    And preencho o valor: 50.00
-    And preencho a distancia: 120.5
-    And preencho a duracao: 2.5
-    And preencho o inicio: "08:30"
-    And preencho o fim: "10:00"
-    And preencho a origem: "Garanhuns"
-    And preencho o destino: "Caruaru"
-    And preencho o onibus: "ABC-1234"
-    And preencho o motorista: "Jose Almeida"
-    And clico em criar uma rota
+    And preencho "nome" de "rotum" com ""
+    And preencho "valor" de "rotum" com 50
+    And preencho "distancia" de "rotum" com 120.5
+    And preencho "duracao" de "rotum" com 2.5
+    And preencho "inicio" de "rotum" com "08:30"
+    And preencho "fim" de "rotum" com "10:00"
+    And preencho "origem" de "rotum" com "Garanhuns"
+    And preencho "destino" de "rotum" com "Caruaru"
+    And seleciono "ABC-1234" como "onibus_id" de "rotum"
+    And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
+    And eu clico em "Create Rotum"
     Then eu vejo a mensagem "O nome deve ser preenchido"
 
   Scenario: registrar rota com o campo origem em branco
     Given que eu estou na pagina de cadastro de onibus
-    And preencho a placa: "ABC-1234"
-    And preencho o chassi: "9BWGD21JX22512345"
-    And preencho o modelo: "Marcopolo Paradiso 1800 DD"
-    And preencho a capacidade: 50
-    And preencho o status: "em operação"
-    And clico em criar onibus
+    And preencho "placa" de "onibus" com "ABC-1234"
+    And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
+    And preencho "modelo" de "onibus" com "Marcopolo Paradiso 1800 DD"
+    And preencho "capacidade" de "onibus" com  50
+    And seleciono "em operação" como "status" de "onibus"
+    And eu clico em "Create Onibus"
     Given que eu estou na pagina de cadastro de motorista
-    And preencho o nome: "Jose Almeida"
-    And preencho o cpf: "12345678910"
-    And preencho o email: "jose@gmail.com"
-    And preencho a senha: "123456!"
-    And preencho o telefone: "11123456789"
-    And preencho o cnh: "1234567891"
-    And clico em criar motorista
+    And preencho "nome" de "motoristum" com "Jose Almeida"
+    And preencho "cpf" de "motoristum" com "12345678910"
+    And preencho "email" de "motoristum" com "jose@gmail.com"
+    And preencho "senha" de "motoristum" com "123456!"
+    And preencho "telefone" de "motoristum" com "11123456789"
+    And preencho "cnh" de "motoristum" com "1234567891"
+    And eu clico em "Create Motoristum"
     When que eu estou na pagina de cadastro de rota
-    And preencho o nome da rota: "Rota do Agreste"
-    And preencho o valor: 50.00
-    And preencho a distancia: 120.5
-    And preencho a duracao: 2.5
-    And preencho o inicio: "08:30"
-    And preencho o fim: "10:00"
-    And preencho a origem: ""
-    And preencho o destino: "Caruaru"
-    And preencho o onibus: "ABC-1234"
-    And preencho o motorista: "Jose Almeida"
-    And clico em criar uma rota
+    And preencho "nome" de "rotum" com "Rota do Agreste"
+    And preencho "valor" de "rotum" com 50.00
+    And preencho "distancia" de "rotum" com 120.5
+    And preencho "duracao" de "rotum" com 2.5
+    And preencho "inicio" de "rotum" com "08:30"
+    And preencho "fim" de "rotum" com "10:00"
+    And preencho "origem" de "rotum" com ""
+    And preencho "destino" de "rotum" com "Caruaru"
+    And seleciono "ABC-1234" como "onibus_id" de "rotum"
+    And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
+    And eu clico em "Create Rotum"
     Then eu vejo a mensagem "A origem deve ser preenchida"
 
   Scenario: editar rota com sucesso
     Given que eu estou na pagina de cadastro de onibus
-    And preencho a placa: "ABC-1234"
-    And preencho o chassi: "9BWGD21JX22512345"
-    And preencho o modelo: "Marcopolo Paradiso 1800 DD"
-    And preencho a capacidade: 50
-    And preencho o status: "em operação"
-    And clico em criar onibus
+    And preencho "placa" de "onibus" com "ABC-1234"
+    And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
+    And preencho "modelo" de "onibus" com "Marcopolo Paradiso 1800 DD"
+    And preencho "capacidade" de "onibus" com  50
+    And seleciono "em operação" como "status" de "onibus"
+    And eu clico em "Create Onibus"
     Given que eu estou na pagina de cadastro de motorista
-    And preencho o nome: "Jose Almeida"
-    And preencho o cpf: "12345678910"
-    And preencho o email: "jose@gmail.com"
-    And preencho a senha: "123456!"
-    And preencho o telefone: "11123456789"
-    And preencho o cnh: "1234567891"
-    And clico em criar motorista
+    And preencho "nome" de "motoristum" com "Jose Almeida"
+    And preencho "cpf" de "motoristum" com "12345678910"
+    And preencho "email" de "motoristum" com "jose@gmail.com"
+    And preencho "senha" de "motoristum" com "123456!"
+    And preencho "telefone" de "motoristum" com "11123456789"
+    And preencho "cnh" de "motoristum" com "1234567891"
+    And eu clico em "Create Motoristum"
     When que eu estou na pagina de cadastro de rota
-    And preencho o nome da rota: "Rota do Agreste"
-    And preencho o valor: 50.00
-    And preencho a distancia: 120.5
-    And preencho a duracao: 2.5
-    And preencho o inicio: "08:30"
-    And preencho o fim: "10:00"
-    And preencho a origem: "Garanhuns"
-    And preencho o destino: "Caruaru"
-    And preencho o onibus: "ABC-1234"
-    And preencho o motorista: "Jose Almeida"
-    And clico em criar uma rota
-    When eu estou na pagina de listagem de rotas
-    And eu acesso uma rota em especifico
-    And eu clico para editar rota
-    And eu altero o campo inicio com "05:00" e fim com "08:00"
-    And clico para atualizar rota
-    Then aparece uma mensagem dizendo que a rota foi atualizada com sucesso
+    And preencho "nome" de "rotum" com "Rota do Agreste"
+    And preencho "valor" de "rotum" com 50.00
+    And preencho "distancia" de "rotum" com 120.5
+    And preencho "duracao" de "rotum" com 2.5
+    And preencho "inicio" de "rotum" com "08:30"
+    And preencho "fim" de "rotum" com "10:00"
+    And preencho "origem" de "rotum" com "Garanhuns"
+    And preencho "destino" de "rotum" com "Caruaru"
+    And seleciono "ABC-1234" como "onibus_id" de "rotum"
+    And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
+    And eu clico em "Create Rotum"
+    When acesso a rota de nome "Rota do Agreste"
+    And eu clico em "Edit this rotum"
+    And preencho "inicio" de "rotum" com "05:00"
+    And preencho "fim" de "rotum" com "08:00"
+    And eu clico em "Update Rotum"
+    Then aparece uma mensagem "Rotum was successfully updated."
 
   Scenario: remover rota com sucesso
     Given que eu estou na pagina de cadastro de onibus
-    And preencho a placa: "ABC-1234"
-    And preencho o chassi: "9BWGD21JX22512345"
-    And preencho o modelo: "Marcopolo Paradiso 1800 DD"
-    And preencho a capacidade: 50
-    And preencho o status: "em operação"
-    And clico em criar onibus
+    And preencho "placa" de "onibus" com "ABC-1234"
+    And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
+    And preencho "modelo" de "onibus" com "Marcopolo Paradiso 1800 DD"
+    And preencho "capacidade" de "onibus" com  50
+    And seleciono "em operação" como "status" de "onibus"
+    And eu clico em "Create Onibus"
     Given que eu estou na pagina de cadastro de motorista
-    And preencho o nome: "Jose Almeida"
-    And preencho o cpf: "12345678910"
-    And preencho o email: "jose@gmail.com"
-    And preencho a senha: "123456!"
-    And preencho o telefone: "11123456789"
-    And preencho o cnh: "1234567891"
-    And clico em criar motorista
+    And preencho "nome" de "motoristum" com "Jose Almeida"
+    And preencho "cpf" de "motoristum" com "12345678910"
+    And preencho "email" de "motoristum" com "jose@gmail.com"
+    And preencho "senha" de "motoristum" com "123456!"
+    And preencho "telefone" de "motoristum" com "11123456789"
+    And preencho "cnh" de "motoristum" com "1234567891"
+    And eu clico em "Create Motoristum"
     When que eu estou na pagina de cadastro de rota
-    And preencho o nome da rota: "Rota do Agreste"
-    And preencho o valor: 50.00
-    And preencho a distancia: 120.5
-    And preencho a duracao: 2.5
-    And preencho o inicio: "08:30"
-    And preencho o fim: "10:00"
-    And preencho a origem: "Garanhuns"
-    And preencho o destino: "Caruaru"
-    And preencho o onibus: "ABC-1234"
-    And preencho o motorista: "Jose Almeida"
-    And clico em criar uma rota
-    And eu estou na pagina de listagem de rotas
-    When eu acesso uma rota em especifico
-    And eu clico para excluir rota
-    Then aparece uma mensagem dizendo que a rota foi excluida com sucesso
+    And preencho "nome" de "rotum" com "Rota do Agreste"
+    And preencho "valor" de "rotum" com 50.00
+    And preencho "distancia" de "rotum" com 120.5
+    And preencho "duracao" de "rotum" com 2.5
+    And preencho "inicio" de "rotum" com "08:30"
+    And preencho "fim" de "rotum" com "10:00"
+    And preencho "origem" de "rotum" com "Garanhuns"
+    And preencho "destino" de "rotum" com "Caruaru"
+    And seleciono "ABC-1234" como "onibus_id" de "rotum"
+    And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
+    And eu clico em "Create Rotum"
+    And acesso a rota de nome "Rota do Agreste"
+    And eu clico em "Destroy this rotum"
+    Then aparece uma mensagem "Rotum was successfully destroyed."
