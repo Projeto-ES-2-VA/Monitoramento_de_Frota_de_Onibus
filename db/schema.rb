@@ -34,13 +34,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_040332) do
 
   create_table "rota", force: :cascade do |t|
     t.string "nome"
+    t.string "origem"
+    t.string "destino"
     t.float "valor"
     t.float "distancia"
     t.float "duracao"
     t.time "inicio"
     t.time "fim"
-    t.string "origem"
-    t.string "destino"
     t.integer "onibus_id", null: false
     t.integer "motoristum_id", null: false
     t.datetime "created_at", null: false
@@ -55,6 +55,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_040332) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

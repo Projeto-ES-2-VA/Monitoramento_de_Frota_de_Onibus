@@ -1,14 +1,10 @@
-<h1>Home</h1>
-<% if user_signed_in? %>
-  <div> Bem vindo, <%= current_user.email %> </div>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-  <h2>Funcionalidades</h2>
-  <ul class="menu">
-    <li><%= link_to "Motorista", home_motorista_url %></li>
-    <li><%= link_to "Onibus", home_onibuses_url %></li>
-    <li><%= link_to "Rotas", home_rota_url %> </li>
-  </ul>
-  <% else %>
-  <%= button_to "Sign in", new_user_session_path %>
-<% end %>
+<%= render 'layouts/account_links' %>
+
+<h2>Funcionalidades</h2>
+<ul class="menu">
+  <li><%= link_to "Motorista", home_motorista_url %></li>
+  <li><%= link_to "Onibus", home_onibuses_url %></li>
+  <li><%= link_to "Rotas", home_rota_url %> </li>
+</ul>
+
 
