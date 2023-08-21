@@ -10,24 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_024327) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_21_040332) do
   create_table "motorista", force: :cascade do |t|
-    t.string "nome", "cpf", "email", "senha", "telefone", "cnh"
+    t.string "nome"
+    t.string "cpf"
+    t.string "email"
+    t.string "senha"
+    t.string "telefone"
+    t.string "cnh"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "onibuses", force: :cascade do |t|
-    t.string "placa", "chassi", "modelo", "status"
+    t.string "placa"
+    t.string "chassi"
+    t.string "modelo"
     t.integer "capacidade"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "rota", force: :cascade do |t|
-    t.string "nome", "origem", "destino"
-    t.float "valor", "distancia", "duracao"
-    t.time "inicio", "fim"
+    t.string "nome"
+    t.float "valor"
+    t.float "distancia"
+    t.float "duracao"
+    t.time "inicio"
+    t.time "fim"
+    t.string "origem"
+    t.string "destino"
     t.integer "onibus_id", null: false
     t.integer "motoristum_id", null: false
     t.datetime "created_at", null: false
@@ -36,7 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_024327) do
     t.index ["onibus_id"], name: "index_rota_on_onibus_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "rota", "motorista"
   add_foreign_key "rota", "onibuses"
 end
-
