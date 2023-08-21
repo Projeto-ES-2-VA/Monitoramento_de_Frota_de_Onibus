@@ -34,42 +34,42 @@ When('o usuario esta na pagina de busca de motorista') do
   visit '/motorista/buscar_motorista'
 end
 
-And('digita o nome do motorista que deseja buscar') do
-  fill_in 'Digite o nome, CPF ou email do motorista', with: "Maria Josefa"
+And('digita o nome {string} do motorista que deseja buscar') do |nome|
+  fill_in 'Digite o nome, CPF ou email do motorista', with: nome
+end
+
+And('digita o cpf {string} do motorista que deseja buscar') do |cpf|
+  fill_in 'Digite o nome, CPF ou email do motorista', with: cpf
+end
+
+And('digita o email {string} do motorista que deseja buscar') do |email|
+  fill_in 'Digite o nome, CPF ou email do motorista', with: email
 end
 
 And("clica no botao buscar") do
   click_button "Buscar"
 end
 
-Then('aparece o motorista desejado') do
-  expect('/motorista/buscar_motorista?query=Maria+Josefa&commit=Buscar ')
+Then('como resultado aparece o motorista de nome {string}') do |nome|
+  expect(page).to have_content(nome)
 end
 
-And('digita o cpf do motorista que deseja buscar') do
-  fill_in 'Digite o nome, CPF ou email do motorista', with: "11578944433"
+Then('como resultado aparece o motorista de cpf {string}') do |cpf|
+  expect(page).to have_content(cpf)
 end
 
-Then('aparece o motorista desejado buscado por cpf') do
-  expect('/motorista/buscar_motorista?query=11578944433&commit=Buscar ')
+Then('como resultado aparece o motorista de email {string}') do |email|
+  expect(page).to have_content(email)
 end
 
-And('digita o email do motorista que deseja buscar') do
-  fill_in 'Digite o nome, CPF ou email do motorista', with: "teste2@cucumber.com"
+And('digita um cpf {string} que nao existe no banco de dados') do |cpf|
+  fill_in 'Digite o nome, CPF ou email do motorista', with: cpf
 end
 
-Then('aparece o motorista desejado buscado por email') do
-  expect('/motorista/buscar_motorista?query=teste2%40cucumber.com&commit=Buscar ')
+And('digita um email {string} que nao existe no banco de dados') do |email|
+  fill_in 'Digite o nome, CPF ou email do motorista', with: email
 end
 
-And('digita um cpf que nao existe no banco de dados') do
-  fill_in 'Digite o nome, CPF ou email do motorista', with: "11578944400"
-end
-
-And('digita um email que nao existe no banco de dados') do
-  fill_in 'Digite o nome, CPF ou email do motorista', with: "inesbrasil@cucumber.com"
-end
-
-Then('aparece a mensagem de que nenhum motorista foi encontrado') do
+Then('como resultado aparece a mensagem de que nenhum motorista foi encontrado') do
   expect(page).to have_content('Nenhum motorista encontrado.')
 end
