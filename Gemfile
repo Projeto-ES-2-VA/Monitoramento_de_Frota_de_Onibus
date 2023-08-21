@@ -33,8 +33,6 @@ gem 'pg_search'
 
 gem 'devise'
 
-# gem to read email in dev mode
-gem "letter_opener", "~> 1.8"
 
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
@@ -46,6 +44,8 @@ end
 
 group :development do
   gem "web-console"
+  # gem to read email in dev mode
+  gem "letter_opener", "~> 1.8"
 end
 
 group :test do
