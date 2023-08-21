@@ -4,7 +4,10 @@
 
 <div>
   <%= link_to "Edit this motoristum", edit_motoristum_path(@motoristum) %> |
-  <%= link_to "Back to motorista", motorista_path %>
+  <%= link_to "Back to motorista", motorista_path %> |
+  <%= link_to "Back to home", "/" %>
+
 
   <%= button_to "Destroy this motoristum", @motoristum, method: :delete %>
+
 </div>
