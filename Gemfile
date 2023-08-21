@@ -45,7 +45,7 @@ end
 group :development do
   gem "web-console"
   # gem to read email in dev mode
-  gem "letter_opener", "~> 1.8"
+  # gem "letter_opener", "~> 1.8"
 end
 
 group :test do
