@@ -8,11 +8,12 @@
 
 <% if @results.any? %>
   <h2>Resultados da Busca:</h2>
-  <ul>
-    <% @results.each do |motorista| %>
-      <li><%= motorista.nome %> - <%= motorista.cpf %> - <%= motorista.email %></li>
-    <% end %>
-  </ul>
+  <% @results.each do |motoristum| %>
+    <%= render motoristum %>
+    <p>
+      <%= link_to "Show this motoristum", motoristum %>
+    </p>
+  <% end %>
 <% else %>
   <p>Nenhum motorista encontrado.</p>
 <% end %>
