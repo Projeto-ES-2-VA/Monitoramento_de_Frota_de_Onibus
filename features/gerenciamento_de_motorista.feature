@@ -4,54 +4,82 @@ Feature: Gerenciamento de Motorista
   So that eu saiba qual veiculo e motorista estao em uma rota
 
   Scenario: Registro de motorista com informacoes validas
-    Given eu que sou um usuario do sistema
-    When eu acesso a pagina de registro do motorista
+    Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
     And preencho "email" com "jose@gmail.com"
     And preencho "senha" com "123456!"
     And preencho "telefone" com "11123456789"
     And preencho "cnh" com "1234567891"
-    And clico no botao para cadastrar o motorista
+    And clico no botao "Create Motoristum"
     Then aparece a mensagem "Motoristum was successfully created."
 
   Scenario: Registro de motorista com informacoes invalidas
-    Given eu que sou um usuario do sistema
-    When eu acesso a pagina de registro do motorista
-    And clico no botao para cadastrar o motorista
+    Given que eu acesso a pagina de registro do motorista
+    And preencho "nome" com "J"
+    And preencho "cpf" com "120"
+    And preencho "email" com "joseom"
+    And preencho "senha" com "12345"
+    And preencho "telefone" com "1112"
+    And preencho "cnh" com "127891"
+    And clico no botao "Create Motoristum"
     Then aparece a mensagem "errors prohibited this motoristum from being saved"
 
   Scenario: editar motorista
-    Given eu que sou um usuario do sistema
-    And existe um motorista registrado com cpf '12345678911'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    And eu clico para editar motorista
-    And preencho "email" com "josealmeida@gmail.com"
-    And clico para atualizar o motorista
+    Given que eu acesso a pagina de registro do motorista
+    And preencho "nome" com "Jose Almeida"
+    And preencho "cpf" com "12345678910"
+    And preencho "email" com "jose@gmail.com"
+    And preencho "senha" com "123456!"
+    And preencho "telefone" com "11123456789"
+    And preencho "cnh" com "1234567891"
+    And clico no botao "Create Motoristum"
+    When eu acesso a pagina de listagem de motorista
+    And eu acesso a pagina de visualizacao de um motorista com cpf "12345678910"
+    And clico no link "Edit this motoristum"
+    And preencho "telefone" com "11123456780"
+    And clico no botao "Update Motoristum"
     Then aparece a mensagem "Motoristum was successfully updated."
 
-    Scenario: editar motorista com email invalido
-    Given eu que sou um usuario do sistema
-    And existe um motorista registrado com cpf '12345678911'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    And eu clico para editar motorista
+  Scenario: editar motorista com email invalido
+    Given que eu acesso a pagina de registro do motorista
+    And preencho "nome" com "Jose Almeida"
+    And preencho "cpf" com "12345678910"
+    And preencho "email" com "jose@gmail.com"
+    And preencho "senha" com "123456!"
+    And preencho "telefone" com "11123456789"
+    And preencho "cnh" com "1234567891"
+    And clico no botao "Create Motoristum"
+    When eu acesso a pagina de listagem de motorista
+    And eu acesso a pagina de visualizacao de um motorista com cpf "12345678910"
+    And clico no link "Edit this motoristum"
     And preencho "email" com "josealmeidagmail.com"
-    And clico para atualizar o motorista
+    And clico no botao "Update Motoristum"
     Then aparece a mensagem "Email is invalid"
 
   Scenario: Remocao de um motorista do sistema
-    Given eu que sou um usuario do sistema
-    And existe um motorista registrado com cpf '12345678910'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    And eu clico para excluir o motorista
+    Given que eu acesso a pagina de registro do motorista
+    And preencho "nome" com "Jose Almeida"
+    And preencho "cpf" com "12345678910"
+    And preencho "email" com "jose@gmail.com"
+    And preencho "senha" com "123456!"
+    And preencho "telefone" com "11123456789"
+    And preencho "cnh" com "1234567891"
+    And clico no botao "Create Motoristum"
+    When eu acesso a pagina de listagem de motorista
+    And eu acesso a pagina de visualizacao de um motorista com cpf "12345678910"
+    And clico no botao "Destroy this motoristum"
     Then aparece a mensagem "Motoristum was successfully destroyed"
 
   Scenario: Exibir detalhes de um motorista
-    Given eu que sou um usuario do sistema
-    And existe um motorista registrado com cpf '12345678920'
-    And eu estou na pagina de listagem de motorista
-    When eu acesso um motorista em especifico
-    Then eu vejo os detalhes do motorista com o cpf: '12345678920' e vejo os campos do mesmo
+    Given que eu acesso a pagina de registro do motorista
+    And preencho "nome" com "Jose Almeida"
+    And preencho "cpf" com "12345678910"
+    And preencho "email" com "jose@gmail.com"
+    And preencho "senha" com "123456!"
+    And preencho "telefone" com "11123456789"
+    And preencho "cnh" com "1234567891"
+    And clico no botao "Create Motoristum"
+    When eu acesso a pagina de listagem de motorista
+    And eu acesso a pagina de visualizacao de um motorista com cpf "12345678910"
+    Then eu vejo os detalhes do motorista com o cpf: "12345678910"
