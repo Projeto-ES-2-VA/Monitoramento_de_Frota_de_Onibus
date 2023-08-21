@@ -23,7 +23,6 @@ When('eu acesso a pagina de visualizacao do onibus com a placa {string}') do |pl
   visit "/onibuses/#{Onibus.find_by(placa: placa).id}"
 end
 
-And('eu clico no link {string}') do |link|
+And("eu clico no link {string}") do |link|
   click_on(link)
 end
-
