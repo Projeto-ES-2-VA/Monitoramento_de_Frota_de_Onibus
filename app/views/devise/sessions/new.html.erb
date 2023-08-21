@@ -1,26 +1,136 @@
-<h2>Log in</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      /* Estilos gerais */
+      body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+      }
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      /* Estilos para o formulário */
+      .login-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: #f4f4f4;
+      }
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      .login-form {
+          max-width: 400px;
+          padding: 20px;
+          background-color: #fff;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+      }
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      /* Estilos para o título do formulário */
+      .form-title {
+          text-align: center;
+          font-size: 24px;
+          margin-bottom: 15px;
+      }
+
+      /* Estilos para os campos do formulário */
+      .field {
+          margin-bottom: 15px;
+      }
+
+      label {
+          font-weight: bold;
+          display: block;
+          margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          background-color: #f9f9f9;
+          box-sizing: border-box; /* Adicione esta linha */
+      }
+
+      /* Estilos para os botões */
+      .actions {
+          margin-top: 15px;
+          text-align: center;
+      }
+
+      input[type="submit"] {
+          padding: 10px 20px;
+          background-color: #007bff;
+          border: none;
+          border-radius: 3px;
+          color: #fff;
+          cursor: pointer;
+          font-size: 16px;
+      }
+
+      /* Estilos para os links */
+      .links {
+          margin-top: 15px;
+          text-align: center;
+      }
+
+      .links a {
+          color: #007bff;
+          text-decoration: none;
+          margin: 0 10px;
+      }
+
+      .remember {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+      }
+
+      .remember label {
+          margin: 0;
+          font-weight: normal;
+          margin-left: 5px; /* Espaçamento entre a caixa de seleção e a etiqueta */
+      }
+
+      .remember input[type="checkbox"] {
+          margin-right: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-form">
+    <div class="form-title">Log In</div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field remember">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+
+    <div class="links">
+      <%= render "devise/shared/links" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+</body>
+</html>
