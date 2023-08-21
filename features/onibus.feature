@@ -4,37 +4,61 @@ Feature: Gerenciamento de onibus
   So that eu mantenha a frota de onibus atualizada
 
   Scenario: Registro de onibus no sistema
-    Given que eu sou um usuario do sistema
-    When eu acesso a pagina de registro de onibus
-    And preencho as informacoes do onibus placa 'ABC-1234', modelo 'Volvo 9700', chassi '7y6JXw8Kbj38k4700', capacidade '50', status 'em operação'
-    And clico no botao para cadastrar o onibus
-    Then vejo uma mensagem de confirmacao de registro do onibus
+    Given que eu acesso a pagina de registro de onibus
+    And entao preencho "placa" com "ABC-1234"
+    And entao preencho "modelo" com "Volvo 9700"
+    And entao preencho "chassi" com "7y6JXw8Kbj38k4700"
+    And entao preencho "capacidade" com "50"
+    And entao seleciono "em operação" como "status"
+    And clico em um botao "Create Onibus"
+    Then vejo a mensagem "Onibus was successfully created."
 
   Scenario: Edicao de informacoes de um onibus
-    Given que eu sou um usuario do sistema
-    And existe um onibus registrado com placa 'XYZ-5678'
-    When eu acesso a pagina de edicao do onibus com a placa 'XYZ-5678'
-    And atualizo as informacoes do onibus modelo 'Mercedes-Benz O500'
-    And clico no botao de atualizacao
-    Then vejo uma mensagem de confirmacao de atualizacao das informacoes do onibus
+    Given que eu acesso a pagina de registro de onibus
+    And entao preencho "placa" com "ABC-1234"
+    And entao preencho "modelo" com "Volvo 9700"
+    And entao preencho "chassi" com "7y6JXw8Kbj38k4700"
+    And entao preencho "capacidade" com "50"
+    And entao seleciono "em operação" como "status"
+    And clico em um botao "Create Onibus"
+    When eu acesso a pagina de visualizacao do onibus com a placa "ABC-1234"
+    And eu clico no link "Edit this onibus"
+    And entao preencho "modelo" com "Mercedes-Benz O500"
+    And clico em um botao "Update Onibus"
+    Then vejo a mensagem "Onibus was successfully updated."
 
   Scenario: Remocao de um onibus do sistema
-    Given que eu sou um usuario do sistema
-    And existe um onibus registrado com placa 'XYZ-5678'
-    When eu acesso a pagina de visualizacao do onibus com a placa 'XYZ-5678'
-    And eu clico para excluir o onibus
-    Then aparece uma mensagem dizendo que o onibus foi excluido com sucesso
+    Given que eu acesso a pagina de registro de onibus
+    And entao preencho "placa" com "ABC-1234"
+    And entao preencho "modelo" com "Volvo 9700"
+    And entao preencho "chassi" com "7y6JXw8Kbj38k4700"
+    And entao preencho "capacidade" com "50"
+    And entao seleciono "em operação" como "status"
+    And clico em um botao "Create Onibus"
+    When eu acesso a pagina de visualizacao do onibus com a placa "ABC-1234"
+    And clico em um botao "Destroy this onibus"
+    Then vejo a mensagem "Onibus was successfully destroyed."
 
   Scenario: Registro de onibus no sistema com campos vazios
-    Given que eu sou um usuario do sistema
-    When eu acesso a pagina de registro de onibus
-    And clico no botao para cadastrar o onibus
-    Then vejo uma mensagem informando que nao e possivel cadastrar o onibus
+    Given que eu acesso a pagina de registro de onibus
+    And entao preencho "placa" com ""
+    And entao preencho "modelo" com ""
+    And entao preencho "chassi" com "78k4700"
+    And entao preencho "capacidade" com "5"
+    And entao seleciono "em operação" como "status"
+    And clico em um botao "Create Onibus"
+    Then vejo a mensagem "errors prohibited this onibus from being saved:"
 
   Scenario: Edicao do campo placa para um valor invalido
-    Given que eu sou um usuario do sistema
-    And existe um onibus registrado com placa 'XYZ-5678'
-    When eu acesso a pagina de edicao do onibus com a placa 'XYZ-5678'
-    And atualizo as informacoes do onibus para a placa 'lbltlal'
-    And clico no botao de atualizacao
-    Then vejo uma mensagem de falha ao tentar atualizar a placa
+    Given que eu acesso a pagina de registro de onibus
+    And entao preencho "placa" com "ABC-1234"
+    And entao preencho "modelo" com "Volvo 9700"
+    And entao preencho "chassi" com "7y6JXw8Kbj38k4700"
+    And entao preencho "capacidade" com "50"
+    And entao seleciono "em operação" como "status"
+    And clico em um botao "Create Onibus"
+    When eu acesso a pagina de visualizacao do onibus com a placa "ABC-1234"
+    And eu clico no link "Edit this onibus"
+    And entao preencho "placa" com "kakak"
+    And clico em um botao "Update Onibus"
+    Then vejo a mensagem "Placa is invalid"
