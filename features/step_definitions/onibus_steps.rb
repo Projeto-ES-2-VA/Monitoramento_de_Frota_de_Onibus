@@ -26,3 +26,4 @@ end
 And('eu clico no link {string}') do |link|
   click_on(link)
 end
+
