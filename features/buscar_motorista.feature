@@ -13,9 +13,9 @@ Feature: Busca de motorista
     And preencho o cnh: "1234567890"
     And clico em criar um motorista
     When o usuario esta na pagina de busca de motorista
-    And digita o nome do motorista que deseja buscar
+    And digita o nome "Maria Josefa" do motorista que deseja buscar
     And clica no botao buscar
-    Then aparece o motorista desejado
+    Then como resultado aparece o motorista de nome "Maria Josefa"
 
   Scenario: buscar motorista por cpf
     Given que eu estou na pagina de cadastro de motorista
@@ -27,9 +27,9 @@ Feature: Busca de motorista
     And preencho o cnh: "1234567890"
     And clico em criar um motorista
     And o usuario esta na pagina de busca de motorista
-    And digita o cpf do motorista que deseja buscar
+    And digita o cpf "11578944433" do motorista que deseja buscar
     And clica no botao buscar
-    Then aparece o motorista desejado buscado por cpf
+    Then como resultado aparece o motorista de cpf "11578944433"
 
   Scenario: buscar motorista por email
     Given que eu estou na pagina de cadastro de motorista
@@ -41,9 +41,9 @@ Feature: Busca de motorista
     And preencho o cnh: "1234567890"
     And clico em criar um motorista
     And o usuario esta na pagina de busca de motorista
-    And digita o email do motorista que deseja buscar
+    And digita o email "teste2@cucumber.com" do motorista que deseja buscar
     And clica no botao buscar
-    Then aparece o motorista desejado buscado por email
+    Then como resultado aparece o motorista de email "teste2@cucumber.com"
 
   Scenario: buscar motorista por cpf nao cadastrado
     Given que eu estou na pagina de cadastro de motorista
@@ -55,9 +55,9 @@ Feature: Busca de motorista
     And preencho o cnh: "1234567890"
     And clico em criar um motorista
     And o usuario esta na pagina de busca de motorista
-    And digita um cpf que nao existe no banco de dados
+    And digita um cpf "11500" que nao existe no banco de dados
     And clica no botao buscar
-    Then aparece a mensagem de que nenhum motorista foi encontrado
+    Then como resultado aparece a mensagem de que nenhum motorista foi encontrado
 
   Scenario: buscar motorista por email nao cadastrado
     Given que eu estou na pagina de cadastro de motorista
@@ -69,6 +69,6 @@ Feature: Busca de motorista
     And preencho o cnh: "1234567890"
     And clico em criar um motorista
     And o usuario esta na pagina de busca de motorista
-    And digita um email que nao existe no banco de dados
+    And digita um email "inesbrasil@cucumber.com" que nao existe no banco de dados
     And clica no botao buscar
-    Then aparece a mensagem de que nenhum motorista foi encontrado
+    Then como resultado aparece a mensagem de que nenhum motorista foi encontrado
