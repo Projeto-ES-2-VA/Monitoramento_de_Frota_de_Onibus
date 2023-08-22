@@ -1,64 +1,45 @@
-Given('o onibus de placa: {string}, chassi: {string}, modelo: {string}, capacidade: {int}, status: {string} foi criado') do |placa, chassi, modelo, capacidade, status|
+And('que eu estou em cadastro de onibus') do
   visit '/onibuses/new'
-  fill_in 'Placa', with: placa
-  fill_in 'Chassi', with: chassi
-  fill_in 'Modelo', with: modelo
-  fill_in 'Capacidade', with: capacidade
-  select(status, from: 'Status')
-  click_button 'Create Onibus'
 end
 
-And('o usuario esta na pagina de busca de onibus') do
+When('estou em busca de onibus') do
   visit '/onibuses/busca'
 end
 
-And('digita a placa do onibus que deseja buscar') do
-  fill_in 'Busca', with: 'ABC-1234'
+And('entao  preencho {string} com {string}') do |campo, valor|
+  fill_in "onibus[#{campo}]", with: valor
 end
 
-When('seleciona a caracteristica placa para buscar') do
-  expect(page).to have_content('Placa:')
-  choose('param_Placa')
+And('entao preencho busca com {string}') do |valor|
+  fill_in "data", with: valor
 end
 
-And('clica em buscar') do
-  click_button 'Buscar'
+
+And('entao  preencho {string} com {float}') do |campo, valor|
+  fill_in "onibus[#{campo}]", with: valor
 end
 
-Then('aparece o onibus desejado') do
-  expect(page).to have_content('Resultados da Busca por ')
+And('entao  preencho {string} com  {int}') do |campo, valor|
+  fill_in "onibus[#{campo}]", with: valor
 end
 
-And('digita o modelo do onibus que deseja buscar') do
-  fill_in 'Busca', with: 'Marcopolo Paradiso 1800 DD'
+And('seleciono {string} como {string}') do |valor, campo|
+  select(valor, from: "onibus[#{campo}]")
 end
 
-When('seleciona a caracteristica modelo para buscar') do
-  expect(page).to have_content('Modelo:')
-  choose('param_Modelo')
+When('escolho a caracteristica {string}') do |param|
+  choose(param)
 end
 
-And('digita o chassi do onibus que deseja buscar') do
-  fill_in 'Busca', with: '9BWGD21JX22512345'
+And('clica em {string}') do |botao|
+  click_link_or_button botao
 end
 
-And('digita um chassi no qual nao existe no banco de dados') do
-  fill_in 'Busca', with: '7347b3dnkke'
+Then('aparece o onibus de placa {string} buscado por {string}') do |placa, param|
+  expect(page).to have_content("Resultados da Busca por #{param}")
+  expect(page).to have_content("Placa: #{placa}")
 end
 
-When('seleciona a caracteristica chassi para buscar') do
-  expect(page).to have_content('Chassi:')
-  choose('param_Chassi')
-end
-
-And('digita uma placa da qual nao existe no banco de dados') do
-  fill_in 'Busca', with: 'CCC-4444'
-end
-
-Then('aparece a mensagem de que nenhum onibus foi encontrado') do
-  expect(page).to have_content('Nenhum onibus encontrado.')
-end
-
-And('digita um modelo da qual nao existe no banco de dados') do
-  fill_in 'Busca', with: 'MERCEDES BENZ 1040'
+Then('vejo aparecer a mensagem {string}') do |mensagem|
+  expect(page).to have_content(mensagem)
 end
