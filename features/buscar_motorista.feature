@@ -4,6 +4,7 @@ Feature: Busca de motorista
   So that eu encontre o motorista ideal para uma rota
 
   Scenario: buscar motorista por nome
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de motorista
     And eu preencho "nome" com "Maria Josefa"
     And eu preencho "cpf" com "11578944433"
@@ -18,6 +19,7 @@ Feature: Busca de motorista
     Then como resultado aparece o motorista de "Nome" de "Maria Josefa"
 
   Scenario: buscar motorista por cpf
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de motorista
     And eu preencho "nome" com "Maria Josefa"
     And eu preencho "cpf" com "11578944433"
@@ -32,6 +34,7 @@ Feature: Busca de motorista
     Then como resultado aparece o motorista de "Cpf" de "11578944433"
 
   Scenario: buscar motorista por email
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de motorista
     And eu preencho "nome" com "Maria Josefa"
     And eu preencho "cpf" com "11578944433"
@@ -46,6 +49,7 @@ Feature: Busca de motorista
     Then como resultado aparece o motorista de "Email" de "teste2@cucumber.com"
 
   Scenario: buscar motorista por cpf nao cadastrado
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de motorista
     And eu preencho "nome" com "Maria Josefa"
     And eu preencho "cpf" com "11578944433"
@@ -60,6 +64,7 @@ Feature: Busca de motorista
     Then como resultado aparece a mensagem de que nenhum motorista foi encontrado
 
   Scenario: buscar motorista por email nao cadastrado
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de motorista
     And eu preencho "nome" com "Maria Josefa"
     And eu preencho "cpf" com "11578944433"
