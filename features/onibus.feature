@@ -4,6 +4,7 @@ Feature: Gerenciamento de onibus
   So that eu mantenha a frota de onibus atualizada
 
   Scenario: Registro de onibus no sistema
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro de onibus
     And entao preencho "placa" com "ABC-1234"
     And entao preencho "modelo" com "Volvo 9700"
@@ -14,6 +15,7 @@ Feature: Gerenciamento de onibus
     Then vejo a mensagem "Onibus was successfully created."
 
   Scenario: Edicao de informacoes de um onibus
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro de onibus
     And entao preencho "placa" com "ABC-1234"
     And entao preencho "modelo" com "Volvo 9700"
@@ -28,6 +30,7 @@ Feature: Gerenciamento de onibus
     Then vejo a mensagem "Onibus was successfully updated."
 
   Scenario: Remocao de um onibus do sistema
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro de onibus
     And entao preencho "placa" com "ABC-1234"
     And entao preencho "modelo" com "Volvo 9700"
@@ -40,6 +43,7 @@ Feature: Gerenciamento de onibus
     Then vejo a mensagem "Onibus was successfully destroyed."
 
   Scenario: Registro de onibus no sistema com campos vazios
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro de onibus
     And entao preencho "placa" com ""
     And entao preencho "modelo" com ""
@@ -50,6 +54,7 @@ Feature: Gerenciamento de onibus
     Then vejo a mensagem "errors prohibited this onibus from being saved:"
 
   Scenario: Edicao do campo placa para um valor invalido
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro de onibus
     And entao preencho "placa" com "ABC-1234"
     And entao preencho "modelo" com "Volvo 9700"
