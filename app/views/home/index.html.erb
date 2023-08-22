@@ -1,10 +1,69 @@
 <%= render 'layouts/account_links' %>
 
-<h2>Funcionalidades</h2>
-<ul class="menu">
-  <li><%= link_to "Motorista", home_motorista_url %></li>
-  <li><%= link_to "Onibus", home_onibuses_url %></li>
-  <li><%= link_to "Rotas", home_rota_url %> </li>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      body {
+          background-image: url("<%= image_path('searc.jpg') %>");
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed; /* Mantém o fundo fixo enquanto a página é rolada */
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+      }
+      .content-box {
+          width: 400px;
+          background-color: #21232d;
+          border-radius: 10px;
+          padding: 30px;
+          margin: 50px auto;
+          color: white;
+          text-align: center;
+      }
+
+      .menu {
+          list-style-type: none;
+          padding: 0;
+      }
+
+      .menu li {
+          margin-bottom: 15px;
+      }
+
+      .menu a {
+          color: white;
+          text-decoration: none;
+          font-size: 18px;
+      }
+
+      h1 {
+          font-size: 28px;
+          border-bottom: 2px solid lightgray;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+      }
+
+      h2 {
+          font-size: 24px;
+          margin-bottom: 20px;
+      }
+  </style>
+
+</head>
+<body>
+<div class="content-box">
+  <h1>Funcionalidades</h1>
+  <ul class="menu">
+    <li><a href="<%= home_motorista_url %>">Motorista</a></li>
+    <li><a href="<%= home_onibuses_url %>">Ônibus</a></li>
+    <li><a href="<%= home_rota_url %>">Rotas</a></li>
+  </ul>
+</div>
+</body>
+</html>
 
 
+<%= render 'layouts/footer' %>
