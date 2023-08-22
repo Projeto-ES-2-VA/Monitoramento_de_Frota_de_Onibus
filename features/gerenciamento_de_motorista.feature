@@ -4,6 +4,7 @@ Feature: Gerenciamento de Motorista
   So that eu saiba qual veiculo e motorista estao em uma rota
 
   Scenario: Registro de motorista com informacoes validas
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
@@ -15,6 +16,7 @@ Feature: Gerenciamento de Motorista
     Then aparece a mensagem "Motoristum was successfully created."
 
   Scenario: Registro de motorista com informacoes invalidas
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "J"
     And preencho "cpf" com "120"
@@ -26,6 +28,7 @@ Feature: Gerenciamento de Motorista
     Then aparece a mensagem "errors prohibited this motoristum from being saved"
 
   Scenario: editar motorista
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
@@ -42,6 +45,7 @@ Feature: Gerenciamento de Motorista
     Then aparece a mensagem "Motoristum was successfully updated."
 
   Scenario: editar motorista com email invalido
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
@@ -58,6 +62,7 @@ Feature: Gerenciamento de Motorista
     Then aparece a mensagem "Email is invalid"
 
   Scenario: Remocao de um motorista do sistema
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
@@ -72,6 +77,7 @@ Feature: Gerenciamento de Motorista
     Then aparece a mensagem "Motoristum was successfully destroyed"
 
   Scenario: Exibir detalhes de um motorista
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu acesso a pagina de registro do motorista
     And preencho "nome" com "Jose Almeida"
     And preencho "cpf" com "12345678910"
