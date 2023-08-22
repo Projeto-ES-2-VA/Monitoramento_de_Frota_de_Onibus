@@ -4,6 +4,7 @@ Feature: Gerenciamento de rotas
   So that eu saiba qual veiculo e motorista estao em uma rota
 
   Scenario: registrar rota com informacoes validas
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de onibus
     And preencho "placa" de "onibus" com "ABC-1234"
     And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
@@ -31,11 +32,13 @@ Feature: Gerenciamento de rotas
     And seleciono "ABC-1234" como "onibus_id" de "rotum" 
     And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
     And eu clico em "Create Rotum"
-    Then eu devo ser redirecionado para a pagina da rota que foi criada
-    And eu vejo a mensagem "Rotum was successfully created."
+    Then eu vejo a mensagem "Rotum was successfully created."
+
+
 
 
   Scenario: registrar rota com o campo nome em branco
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de onibus
     And preencho "placa" de "onibus" com "ABC-1234"
     And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
@@ -66,6 +69,7 @@ Feature: Gerenciamento de rotas
     Then eu vejo a mensagem "O nome deve ser preenchido"
 
   Scenario: registrar rota com o campo origem em branco
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de onibus
     And preencho "placa" de "onibus" com "ABC-1234"
     And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
@@ -96,6 +100,7 @@ Feature: Gerenciamento de rotas
     Then eu vejo a mensagem "A origem deve ser preenchida"
 
   Scenario: editar rota com sucesso
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de onibus
     And preencho "placa" de "onibus" com "ABC-1234"
     And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
@@ -123,14 +128,14 @@ Feature: Gerenciamento de rotas
     And seleciono "ABC-1234" como "onibus_id" de "rotum"
     And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
     And eu clico em "Create Rotum"
-    When acesso a rota de nome "Rota do Agreste"
-    And eu clico em "Edit this rotum"
+    When eu clico em "Edit this rotum"
     And preencho "inicio" de "rotum" com "05:00"
     And preencho "fim" de "rotum" com "08:00"
     And eu clico em "Update Rotum"
-    Then aparece uma mensagem "Rotum was successfully updated."
+    Then eu vejo a mensagem "Rotum was successfully updated."
 
   Scenario: remover rota com sucesso
+    Given sou um usuario autenticado do sistema com email "email@email.com" e senha "12345678"
     Given que eu estou na pagina de cadastro de onibus
     And preencho "placa" de "onibus" com "ABC-1234"
     And preencho "chassi" de "onibus" com "9BWGD21JX22512345"
@@ -158,6 +163,5 @@ Feature: Gerenciamento de rotas
     And seleciono "ABC-1234" como "onibus_id" de "rotum"
     And seleciono "Jose Almeida" como "motoristum_id" de "rotum"
     And eu clico em "Create Rotum"
-    And acesso a rota de nome "Rota do Agreste"
     And eu clico em "Destroy this rotum"
-    Then aparece uma mensagem "Rotum was successfully destroyed."
+    Then eu vejo a mensagem "Rotum was successfully destroyed."

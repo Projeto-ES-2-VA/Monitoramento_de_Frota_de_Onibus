@@ -1,6 +1,6 @@
 Given('que eu acesso a pagina de registro do motorista') do
   visit "motorista/new"
-  expect(page).to have_content("New motoristum")
+  expect(page).to have_content("Novo Motorista")
 end
 
 And('preencho {string} com {string}') do |campo, valor|
