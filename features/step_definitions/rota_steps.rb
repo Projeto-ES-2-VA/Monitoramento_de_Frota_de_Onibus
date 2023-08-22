@@ -1,48 +1,32 @@
-require 'rspec/expectations'
-
-Given('dado um motorista registrado com nome {string}') do |nome|
-  visit '/motorista/new'
-  fill_in 'Nome', with: nome
-  fill_in 'Cpf', with: '12345098761'
-  fill_in 'Email', with: 'claudinho@gmail.com'
-  fill_in 'Senha', with: '12345@'
-  fill_in 'Telefone', with: '11123456789'
-  fill_in 'Cnh', with: '0123456789'
-  click_button 'Create Motoristum'
-  expect(page).to have_content(nome)
-end
-
-
-And('existe um onibus com placa {string}') do |placa|
+Given('eu quem estou na pagina de cadastro de onibus') do
   visit '/onibuses/new'
-  fill_in 'Placa', with: placa
-  fill_in 'Chassi', with: "11111111111111111"
-  fill_in 'Modelo', with: "modelo"
-  fill_in 'Capacidade', with: 50
-  select("em operação", from: 'Status')
-  click_button 'Create Onibus'
-  expect(page).to have_content(placa)
 end
 
-And('que existe uma rota registrada no sistema para a placa {string}, e motorista de nome {string}') do |placa, motorista|
+Given('eu quem estou na pagina de cadastro de motorista') do
+  visit '/motorista/new'
+end
+
+When('eu quem estou na pagina de cadastro de rota') do
   visit '/rota/new'
-  fill_in 'Nome', with: "nome 1"
-  fill_in 'Valor', with: 10
-  fill_in 'Distancia', with: 10
-  fill_in 'Duracao', with: 10
-  fill_in 'Inicio', with: "7:00"
-  fill_in 'Fim', with: "10:00"
-  fill_in 'Origem', with: "origem"
-  fill_in 'Destino', with: "destino"
-  select(placa, from: 'Onibus')
-  select(motorista, from: 'Motoristum')
-  click_button 'Create Rotum'
-
-  visit '/rota'
-  expect(page).to have_content("nome 1")
 end
 
-Given("eu visito a pagina de buscar rotas por onibus") do
+And('eu quem preencho {string} de {string} com {string}') do |campo, classe, valor|
+  fill_in "#{classe}_#{campo}", with: valor
+end
+
+And('eu quem preencho {string} de {string} com {int}') do |campo, classe, valor|
+  fill_in "#{classe}_#{campo}", with: valor
+end
+
+And('eu quem preencho {string} de {string} com  {float}') do |campo, classe, valor|
+  fill_in "#{classe}_#{campo}", with: valor
+end
+
+And('eu seleciono {string} como {string} de {string}') do |valor, campo, classe|
+  select(valor, from: "#{classe}_#{campo}")
+end
+
+And("eu visito a pagina de buscar rotas por onibus") do
   visit buscar_por_onibus_path
   expect(page).to have_content("Buscar")
 end
@@ -51,15 +35,15 @@ And('eu seleciono a placa {string} do onibus') do |placa|
   select placa, from: 'placa'
 end
 
-Then('o sistema exibe a lista de rotas percorridas pelo onibus') do
+Then('o sistema exibe a rota de nome {string}') do |nome|
   expect(page).to have_content('Resultados')
-  expect(page).to have_content('nome 1')
+  expect(page).to have_content(nome)
 end
 
-Then('o sistema exibe a mensagem {string}') do |mensagem|
+Then('exibe a mensagem {string}') do |mensagem|
   expect(page).to have_content(mensagem)
 end
 
-And('eu clico no botao buscar') do
-  click_button 'Buscar'
+And('entao clico no botao {string}') do |botao|
+  click_button botao
 end
