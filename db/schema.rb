@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_040332) do
     t.string "nome"
     t.string "cpf"
     t.string "email"
+    t.string "senha"
     t.string "telefone"
     t.string "cnh"
     t.datetime "created_at", null: false
