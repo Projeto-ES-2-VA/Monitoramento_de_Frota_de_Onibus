@@ -4,7 +4,6 @@ class CreateMotorista < ActiveRecord::Migration[7.0]
       t.string :nome
       t.string :cpf
       t.string :email
-      t.string :senha
       t.string :telefone
       t.string :cnh
 

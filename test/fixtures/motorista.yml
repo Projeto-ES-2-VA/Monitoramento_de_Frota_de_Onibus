@@ -4,7 +4,6 @@ one:
   nome: Henrique Almeida
   cpf: 11111111111
   email: henriquealmeida@gmail.com
-  senha: 12345@
   telefone: 12345678910
   cnh: 1234567890
 
@@ -12,6 +11,5 @@ two:
   nome: Roberto Carlos
   cpf: 11111111118
   email: roberto.carlos@email.com
-  senha: 12345@
   telefone: 12345678919
   cnh: 1234567896
